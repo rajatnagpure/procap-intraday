@@ -3,3 +3,4 @@ lxml>=4.5.0
 pyvirtualdisplay>=0.2.5
 selenium>=3.141.0
 kiteconnect>=3.8.2
+nsetools>=1.0.11
