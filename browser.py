@@ -42,7 +42,7 @@ class website:
 
         except Exception as e:
             print('failed to login {}'.format(str(e)))
-        self.allow_notification()
+        #self.allow_notification()
         self.browser.get(IntradayURL)
 
     def allow_notification(self):
@@ -63,7 +63,7 @@ class website:
         tr = table_rows[2]
         td = tr.find_all('td')
         row = [i.text for i in td]
-        print(row)
+        return row
 
     def stop_browser(self):
         self.browser.quit()
