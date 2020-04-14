@@ -8,7 +8,7 @@ from constants import *
 class website:
     def __init__(self):
         # creating and using virtual display
-        self.display = Display(visible=1, size=(1024, 768))
+        self.display = Display(visible=DISPLAY_FORMATE, size=(1024, 768))
         self.display.start()
         chrome_options = webdriver.ChromeOptions()
         # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -25,12 +25,13 @@ class website:
 
     def login(self):
         self.browser.get(LoginURL)
+        self.wait = WebDriverWait(self.browser, 100)
         try:
-            username_box = WebDriverWait(self.browser, 10).until(
+            username_box = self.wait.until(
                 lambda driver: self.browser.find_element_by_xpath(UsernameXpath))
-            password_box = WebDriverWait(self.browser, 10).until(
+            password_box = self.wait.until(
                 lambda driver: self.browser.find_element_by_xpath(PasswordXpath))
-            login_button = WebDriverWait(self.browser, 10).until(
+            login_button = self.wait.until(
                 lambda driver: self.browser.find_element_by_xpath(LoginButtonXpath))
 
             username_box.clear()
@@ -38,25 +39,25 @@ class website:
             username_box.send_keys(Username)
             password_box.send_keys(Password)
             login_button.click()
-            print('Login Successful')
+            logger.info('Login Successful')
 
         except Exception as e:
-            print('failed to login {}'.format(str(e)))
-        #self.allow_notification()
+            logger.error('failed to login {}'.format(str(e)))
+        # self.allow_notification()
         self.browser.get(IntradayURL)
 
-    def allow_notification(self):
-        try:
-            notification = WebDriverWait(self.browser, 10).until(
-                lambda driver: self.browser.find_element_by_xpath(NotificationProposeXpath))
-            notification.click()
-            print("Notification proposal accepted")
-        except Exception as e:
-            print('failed to Allow notification {}'.format(str(e)))
+    # def allow_notification(self):
+    #     try:
+    #         notification = WebDriverWait(self.browser, 10).until(
+    #             lambda driver: self.browser.find_element_by_xpath(NotificationProposeXpath))
+    #         notification.click()
+    #         print("Notification proposal accepted")
+    #     except Exception as e:
+    #         print('failed to Allow notification {}'.format(str(e)))
 
     def get_call(self):
         self.browser.refresh()
-        WebDriverWait(self.browser, 10).until(lambda driver: self.browser.find_element_by_xpath(CallTableRow))
+        self.wait.until(lambda driver: self.browser.find_element_by_xpath(CallTableRow))
         soup = bs4.BeautifulSoup(self.browser.page_source, 'lxml')
         table = soup.table
         table_rows = table.find_all('tr')

@@ -47,21 +47,24 @@ class extractValues:
         # getting stock Symbol or Ticker out of company name
         # it might be wrong and will return None if went wrong
         # it uses function get_all_matches
-        close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
-        close_match_fin = []
-        for i in close_matches:
-            number = all_company_quotes.index(i)
-            if number % 2 != 0:
-                number = number - 1
-            close_match_fin.append(all_company_quotes[number])
-        self.mini = 100
-        self.my_stock = close_match_fin[0]
-        nse = Nse()
-        for i in close_match_fin:
-            q = abs(nse.get_quote(i)['lastPrice'] - self.order_price)
-            if q < self.mini:
-                self.mini = q
-                self.my_stock = i
+        # close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
+        # close_match_fin = []
+        # for i in close_matches:
+        #     number = all_company_quotes.index(i)
+        #     if number % 2 != 0:
+        #         number = number - 1
+        #     close_match_fin.append(all_company_quotes[number])
+        # self.mini = 100
+        # self.my_stock = close_match_fin[0]
+        # try:
+        #     nse = Nse()
+        #     for i in close_match_fin:
+        #         q = abs(nse.get_quote(i)['lastPrice'] - self.order_price)
+        #         if q < self.mini:
+        #             self.mini = q
+        #             self.my_stock = i
+        # except Exception as e:
+        #     logger.error('Exception Message'+e.__str__())
 
     def reuse(self, row_call_detail):
         self.detail = row_call_detail[2]
@@ -99,21 +102,24 @@ class extractValues:
         # getting stock Symbol or Ticker out of company name
         # it might be wrong and will return None if went wrong
         # it uses function get_all_matches
-        close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
-        close_match_fin = []
-        for i in close_matches:
-            number = all_company_quotes.index(i)
-            if number % 2 != 0:
-                number = number - 1
-            close_match_fin.append(all_company_quotes[number])
-        self.mini = 100
-        self.my_stock = close_match_fin[0]
-        nse = Nse()
-        for i in close_match_fin:
-            q = abs(nse.get_quote(i)['lastPrice'] - self.order_price)
-            if q < self.mini:
-                self.mini = q
-                self.my_stock = i
+        # close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
+        # close_match_fin = []
+        # for i in close_matches:
+        #     number = all_company_quotes.index(i)
+        #     if number % 2 != 0:
+        #         number = number - 1
+        #     close_match_fin.append(all_company_quotes[number])
+        # self.mini = 100
+        # self.my_stock = close_match_fin[0]
+        # try:
+        #     nse = Nse()
+        #     for i in close_match_fin:
+        #         q = abs(nse.get_quote(i)['lastPrice'] - self.order_price)
+        #         if q < self.mini:
+        #             self.mini = q
+        #             self.my_stock = i
+        # except Exception as e:
+        #     logger.error('Exception Message' + e.__str__())
 
     def get_call_action(self):
         return self.call_action
@@ -124,8 +130,8 @@ class extractValues:
         else:
             return None
 
-    def get_company_quote(self):
-        return self.my_stock
+    # def get_company_quote(self):
+    #     return self.my_stock
 
     def get_order_price(self):
         return self.order_price

@@ -1,0 +1,83 @@
+DEBUG ::: 2020-04-14 09:05:01,021 ::: command: ['Xvfb', '-help']
+DEBUG ::: 2020-04-14 09:05:01,023 ::: process was started (pid=3151)
+DEBUG ::: 2020-04-14 09:05:01,026 ::: process has ended, return code=0
+DEBUG ::: 2020-04-14 09:05:01,027 ::: command: ['Xvfb', '-br', '-nolisten', 'tcp', '-screen', '0', '1024x768x24', ':1059']
+DEBUG ::: 2020-04-14 09:05:01,027 ::: command: ['Xvfb', '-br', '-nolisten', 'tcp', '-screen', '0', '1024x768x24', ':1060']
+DEBUG ::: 2020-04-14 09:05:01,028 ::: process was started (pid=3152)
+DEBUG ::: 2020-04-14 09:05:01,028 ::: DISPLAY=:1060
+DEBUG ::: 2020-04-14 09:05:01,029 ::: command: ['xdpyinfo']
+DEBUG ::: 2020-04-14 09:05:01,030 ::: process was started (pid=3153)
+DEBUG ::: 2020-04-14 09:05:01,091 ::: process has ended, return code=0
+INFO ::: 2020-04-14 09:05:01,091 ::: Successfully started X with display ":1060".
+DEBUG ::: 2020-04-14 09:05:02,103 ::: POST http://127.0.0.1:34035/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "chrome", "platformName": "any", "goog:chromeOptions": {"prefs": {"profile.default_content_setting_values.notifications": 1}, "extensions": [], "args": ["--enable-infobars", "start-maximized", "--enable-extensions"]}}}, "desiredCapabilities": {"browserName": "chrome", "version": "", "platform": "ANY", "goog:chromeOptions": {"prefs": {"profile.default_content_setting_values.notifications": 1}, "extensions": [], "args": ["--enable-infobars", "start-maximized", "--enable-extensions"]}}}
+DEBUG ::: 2020-04-14 09:05:02,106 ::: Starting new HTTP connection (1): 127.0.0.1:34035
+DEBUG ::: 2020-04-14 09:05:02,540 ::: http://127.0.0.1:34035 "POST /session HTTP/1.1" 200 646
+DEBUG ::: 2020-04-14 09:05:02,541 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:02,541 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/url {"url": "https://procapital.mohdfaiz.com/login.php"}
+DEBUG ::: 2020-04-14 09:05:07,305 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/url HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:07,306 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,306 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element {"using": "xpath", "value": "//*[@id=\"panel_dn\"]/div[2]/form/div[1]/div/input"}
+DEBUG ::: 2020-04-14 09:05:07,326 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element HTTP/1.1" 200 88
+DEBUG ::: 2020-04-14 09:05:07,326 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,326 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element {"using": "xpath", "value": "//*[@id=\"panel_dn\"]/div[2]/form/div[2]/div/input"}
+DEBUG ::: 2020-04-14 09:05:07,341 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element HTTP/1.1" 200 88
+DEBUG ::: 2020-04-14 09:05:07,341 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,341 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element {"using": "xpath", "value": "//*[@id=\"panel_dn\"]/div[2]/form/div[3]/div/input"}
+DEBUG ::: 2020-04-14 09:05:07,355 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element HTTP/1.1" 200 88
+DEBUG ::: 2020-04-14 09:05:07,356 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,356 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element/a446d679-5ac5-457c-aa79-1ca2840aac38/clear {"id": "a446d679-5ac5-457c-aa79-1ca2840aac38"}
+DEBUG ::: 2020-04-14 09:05:07,393 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element/a446d679-5ac5-457c-aa79-1ca2840aac38/clear HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:07,393 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,393 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element/3592ceb4-a7cc-4956-80d4-bf8955eefc56/clear {"id": "3592ceb4-a7cc-4956-80d4-bf8955eefc56"}
+DEBUG ::: 2020-04-14 09:05:07,423 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element/3592ceb4-a7cc-4956-80d4-bf8955eefc56/clear HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:07,424 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,424 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element/a446d679-5ac5-457c-aa79-1ca2840aac38/value {"text": "rajatnagpure.rn@gmail.com", "value": ["r", "a", "j", "a", "t", "n", "a", "g", "p", "u", "r", "e", ".", "r", "n", "@", "g", "m", "a", "i", "l", ".", "c", "o", "m"], "id": "a446d679-5ac5-457c-aa79-1ca2840aac38"}
+DEBUG ::: 2020-04-14 09:05:07,617 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element/a446d679-5ac5-457c-aa79-1ca2840aac38/value HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:07,617 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,617 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element/3592ceb4-a7cc-4956-80d4-bf8955eefc56/value {"text": "Rajat@321", "value": ["R", "a", "j", "a", "t", "@", "3", "2", "1"], "id": "3592ceb4-a7cc-4956-80d4-bf8955eefc56"}
+DEBUG ::: 2020-04-14 09:05:07,680 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element/3592ceb4-a7cc-4956-80d4-bf8955eefc56/value HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:07,680 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:07,680 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element/d6533c03-ef0f-473c-a39e-9aaf9ae8c791/click {"id": "d6533c03-ef0f-473c-a39e-9aaf9ae8c791"}
+DEBUG ::: 2020-04-14 09:05:10,002 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element/d6533c03-ef0f-473c-a39e-9aaf9ae8c791/click HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:10,003 ::: Finished Request
+INFO ::: 2020-04-14 09:05:10,003 ::: Login Successful
+DEBUG ::: 2020-04-14 09:05:10,003 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/url {"url": "https://procapital.mohdfaiz.com/intraday-calls.php"}
+DEBUG ::: 2020-04-14 09:05:11,365 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/url HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:11,366 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:11,366 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/refresh {}
+DEBUG ::: 2020-04-14 09:05:11,754 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/refresh HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:11,754 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:11,754 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element {"using": "xpath", "value": "//*[@id=\"responsecontainer\"]/div/table/tbody/tr[1]/td[1]"}
+DEBUG ::: 2020-04-14 09:05:11,899 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element HTTP/1.1" 404 281
+DEBUG ::: 2020-04-14 09:05:11,899 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:12,401 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element {"using": "xpath", "value": "//*[@id=\"responsecontainer\"]/div/table/tbody/tr[1]/td[1]"}
+DEBUG ::: 2020-04-14 09:05:18,291 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element HTTP/1.1" 200 88
+DEBUG ::: 2020-04-14 09:05:18,293 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:18,293 ::: GET http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/source {}
+DEBUG ::: 2020-04-14 09:05:18,315 ::: http://127.0.0.1:34035 "GET /session/443daefaf4776876313d57cad2d7fa88/source HTTP/1.1" 200 29753
+DEBUG ::: 2020-04-14 09:05:18,317 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:18,376 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/refresh {}
+DEBUG ::: 2020-04-14 09:05:18,761 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/refresh HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:18,761 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:18,762 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element {"using": "xpath", "value": "//*[@id=\"responsecontainer\"]/div/table/tbody/tr[1]/td[1]"}
+DEBUG ::: 2020-04-14 09:05:18,774 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element HTTP/1.1" 404 281
+DEBUG ::: 2020-04-14 09:05:18,774 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:19,275 ::: POST http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/element {"using": "xpath", "value": "//*[@id=\"responsecontainer\"]/div/table/tbody/tr[1]/td[1]"}
+DEBUG ::: 2020-04-14 09:05:21,536 ::: http://127.0.0.1:34035 "POST /session/443daefaf4776876313d57cad2d7fa88/element HTTP/1.1" 200 88
+DEBUG ::: 2020-04-14 09:05:21,538 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:21,539 ::: GET http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88/source {}
+DEBUG ::: 2020-04-14 09:05:21,562 ::: http://127.0.0.1:34035 "GET /session/443daefaf4776876313d57cad2d7fa88/source HTTP/1.1" 200 29753
+DEBUG ::: 2020-04-14 09:05:21,564 ::: Finished Request
+INFO ::: 2020-04-14 09:05:21,613 ::: getting pass
+INFO ::: 2020-04-14 09:05:21,613 ::: placing square off orders
+INFO ::: 2020-04-14 09:05:31,621 ::: Refresh Count is : 1
+INFO ::: 2020-04-14 09:05:31,621 ::: Exit and Out
+DEBUG ::: 2020-04-14 09:05:31,622 ::: DELETE http://127.0.0.1:34035/session/443daefaf4776876313d57cad2d7fa88 {}
+DEBUG ::: 2020-04-14 09:05:31,676 ::: http://127.0.0.1:34035 "DELETE /session/443daefaf4776876313d57cad2d7fa88 HTTP/1.1" 200 14
+DEBUG ::: 2020-04-14 09:05:31,677 ::: Finished Request
+DEBUG ::: 2020-04-14 09:05:31,703 ::: DISPLAY=:0
+DEBUG ::: 2020-04-14 09:05:31,703 ::: stopping process (pid=3152 cmd="['Xvfb', '-br', '-nolisten', 'tcp', '-screen', '0', '1024x768x24', ':1060']")
+DEBUG ::: 2020-04-14 09:05:31,704 ::: process is active -> sending SIGTERM
+DEBUG ::: 2020-04-14 09:05:31,713 ::: process has ended, return code=0
+DEBUG ::: 2020-04-14 09:05:31,714 ::: stdout=
+DEBUG ::: 2020-04-14 09:05:31,714 ::: stderr=
