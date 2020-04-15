@@ -1,6 +1,27 @@
 from datetime import time
 import logging
 
+# Zerodha API Info
+zerodha_api_key = ""
+Zerodha_api_secret = ""
+Zerodha_request_token = ""
+
+# Market timing for live
+market_opening_time = time(9, 15, 0)
+square_off_time = time(15, 10, 0)
+market_closing_time = time(15,20, 0)
+
+# Logging info and things
+LOG_FORMAT = "%(levelname)s ::: %(asctime)s ::: %(message)s"
+logging.basicConfig(filename=r"./log.txt",
+                    level=logging.DEBUG,
+                    format=LOG_FORMAT,
+                    filemode='w')
+logger = logging.getLogger()
+
+# Browser Code utility
+DISPLAY_FORMATE = 0
+
 # Procapital.Mohdfaiz.com site Info
 LoginURL = "https://procapital.mohdfaiz.com/login.php"
 IntradayURL = "https://procapital.mohdfaiz.com/intraday-calls.php"
@@ -743,24 +764,3 @@ all_company_quotes = ['symbol', 'nameofcompany', '20microns', '20micronslimited'
                       'zodjrdmkj', 'zodiacjrd-mkjlimited', 'zota', 'zotahealthcarelimited', 'zuari',
                       'zuariagrochemicalslimited', 'zuariglob', 'zuarigloballimited', 'zyduswell',
                       'zyduswellnesslimited']
-
-# Zerodha API Info
-zerodha_api_key = ""
-Zerodha_api_secret = ""
-Zerodha_request_token = ""
-
-# Market timing for live
-market_opening_time = time(9, 15, 0)
-square_off_time = time(15, 10, 0)
-market_closing_time = time(15,20, 0)
-
-# Logging info and things
-LOG_FORMAT = "%(levelname)s ::: %(asctime)s ::: %(message)s"
-logging.basicConfig(filename=r"./log.txt",
-                    level=logging.DEBUG,
-                    format=LOG_FORMAT,
-                    filemode='w')
-logger = logging.getLogger()
-
-# Browser Code utility
-DISPLAY_FORMATE = 0
