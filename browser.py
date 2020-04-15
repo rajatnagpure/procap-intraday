@@ -40,6 +40,7 @@ class website:
             password_box.send_keys(Password)
             login_button.click()
             logger.info('Login Successful')
+            print('Login Successful')
 
         except Exception as e:
             logger.error('failed to login {}'.format(str(e)))

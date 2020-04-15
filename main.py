@@ -52,7 +52,7 @@ def start():
         if datetime.now().time() > square_off_time:
             # Place Square Off orders
             logger.info('placing square off orders')
-            time.sleep(10*60)
+            time.sleep(10)
             logger.info('Refresh Count is : {}'.format(refresh_count))
             logger.info('Exit and Out')
             procap.stop_browser()
