@@ -1,5 +1,6 @@
 from nsetools import Nse
 from constants import *
+from datetime import datetime
 
 
 def get_all_matches(input_list, subs):
@@ -42,6 +43,13 @@ class extractValues:
             exit_price_init_index = self.detail.find('@')
             exit_price_last_index = self.detail.find('\n')
             self.exit_price = float(self.detail[exit_price_init_index + 1:exit_price_last_index])
+            self.detail = self.detail[exit_price_last_index + 1:]
+        # Entry time detail
+        entry_time_init_index = self.detail.find(':') + 2
+        entry_time_last_index = self.detail.find('\n')
+        entry_time_str = self.detail[entry_time_init_index:entry_time_last_index]
+        str_format = '%I:%M %p'
+        self.entry_time = datetime.strptime(entry_time_str, str_format).time()
         # some other detail
         self.call_action = row_call_detail[1]
         # getting stock Symbol or Ticker out of company name
@@ -97,6 +105,12 @@ class extractValues:
             exit_price_init_index = self.detail.find('@')
             exit_price_last_index = self.detail.find('\n')
             self.exit_price = float(self.detail[exit_price_init_index + 1:exit_price_last_index])
+        # Entry time detail
+        entry_time_init_index = self.detail.find(':') + 2
+        entry_time_last_index = self.detail.find('\n')
+        entry_time_str = self.detail[entry_time_init_index:entry_time_last_index]
+        str_format = '%I:%M %p'
+        self.entry_time = datetime.strptime(entry_time_str, str_format).time()
         # some other detail
         self.call_action = row_call_detail[1]
         # getting stock Symbol or Ticker out of company name
@@ -144,3 +158,6 @@ class extractValues:
 
     def get_exit_price(self):
         return self.exit_price
+
+    def get_entry_time(self):
+        return self.entry_time

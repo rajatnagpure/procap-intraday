@@ -46,14 +46,14 @@ class website:
         # self.allow_notification()
         self.browser.get(IntradayURL)
 
-    # def allow_notification(self):
-    #     try:
-    #         notification = WebDriverWait(self.browser, 10).until(
-    #             lambda driver: self.browser.find_element_by_xpath(NotificationProposeXpath))
-    #         notification.click()
-    #         print("Notification proposal accepted")
-    #     except Exception as e:
-    #         print('failed to Allow notification {}'.format(str(e)))
+    def allow_notification(self):
+        try:
+            notification = WebDriverWait(self.browser, 10).until(
+                lambda driver: self.browser.find_element_by_xpath(NotificationProposeXpath))
+            notification.click()
+            print("Notification proposal accepted")
+        except Exception as e:
+            print('failed to Allow notification {}'.format(str(e)))
 
     def get_call(self):
         self.browser.refresh()
