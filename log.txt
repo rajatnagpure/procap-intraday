@@ -70,14 +70,14 @@ DEBUG ::: 2020-04-15 16:31:49,810 ::: http://127.0.0.1:60601 "GET /session/a9809
 DEBUG ::: 2020-04-15 16:31:49,811 ::: Finished Request
 INFO ::: 2020-04-15 16:31:49,827 ::: getting pass
 INFO ::: 2020-04-15 16:31:49,828 ::: placing square off orders
-INFO ::: 2020-04-15 16:31:59,835 ::: Refresh Count is : 1
-INFO ::: 2020-04-15 16:31:59,836 ::: Exit and Out
-DEBUG ::: 2020-04-15 16:31:59,836 ::: DELETE http://127.0.0.1:60601/session/a98096ce225030baaabc2f5356a0a8c3 {}
-DEBUG ::: 2020-04-15 16:31:59,897 ::: http://127.0.0.1:60601 "DELETE /session/a98096ce225030baaabc2f5356a0a8c3 HTTP/1.1" 200 14
-DEBUG ::: 2020-04-15 16:31:59,898 ::: Finished Request
-DEBUG ::: 2020-04-15 16:31:59,922 ::: DISPLAY=:0
-DEBUG ::: 2020-04-15 16:31:59,922 ::: stopping process (pid=24866 cmd="['Xvfb', '-br', '-nolisten', 'tcp', '-screen', '0', '1024x768x24', ':1032']")
-DEBUG ::: 2020-04-15 16:31:59,922 ::: process is active -> sending SIGTERM
-DEBUG ::: 2020-04-15 16:32:00,056 ::: process has ended, return code=0
-DEBUG ::: 2020-04-15 16:32:00,056 ::: stdout=
-DEBUG ::: 2020-04-15 16:32:00,056 ::: stderr=
+INFO ::: 2020-04-15 16:44:45,199 ::: Refresh Count is : 1
+INFO ::: 2020-04-15 16:44:45,200 ::: Exit and Out
+DEBUG ::: 2020-04-15 16:44:45,200 ::: DELETE http://127.0.0.1:52573/session/564f9b8f78ee8ca3561147f6dc8196ce {}
+DEBUG ::: 2020-04-15 16:44:45,203 ::: http://127.0.0.1:52573 "DELETE /session/564f9b8f78ee8ca3561147f6dc8196ce HTTP/1.1" 200 14
+DEBUG ::: 2020-04-15 16:44:45,204 ::: Finished Request
+DEBUG ::: 2020-04-15 16:44:45,216 ::: DISPLAY=:0
+DEBUG ::: 2020-04-15 16:44:45,216 ::: stopping process (pid=24472 cmd="['Xvfb', '-br', '-nolisten', 'tcp', '-screen', '0', '1024x768x24', ':1028']")
+DEBUG ::: 2020-04-15 16:44:45,217 ::: process is active -> sending SIGTERM
+DEBUG ::: 2020-04-15 16:44:45,220 ::: process has ended, return code=0
+DEBUG ::: 2020-04-15 16:44:45,221 ::: stdout=
+DEBUG ::: 2020-04-15 16:44:45,221 ::: stderr=

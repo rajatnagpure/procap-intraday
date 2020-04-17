@@ -7,8 +7,13 @@ import copy
 
 
 def start():
-    procap = website()
-    procap.login()
+    try:
+        procap = website()
+        procap.login()
+    except Exception as e:
+        logger.error("error while opening website and login : "+e.__str__())
+        start()
+        return
 
     # list and calls
     curr_list = procap.get_call()
@@ -22,7 +27,10 @@ def start():
     while 1:
         time.sleep(2)
         # refresh list
-        curr_list = procap.get_call()
+        try :
+            curr_list = procap.get_call()
+        except Exception as e:
+            logger.error("Exception while refreshing call : " + e.__str__())
 
         refresh_count = refresh_count + 1
         if curr_list == prev_list:
@@ -30,7 +38,7 @@ def start():
             pass
         else:
             new_call.reuse(curr_list)
-            if curr_list.find('exit') is -1:
+            if curr_list[2].find('exit') is -1:
                 if (new_call.entry_time - datetime.now().time()).total_seconds() > 5*60:
                     pass
                 else:
