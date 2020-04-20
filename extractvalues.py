@@ -105,6 +105,7 @@ class extractValues:
             exit_price_init_index = self.detail.find('@')
             exit_price_last_index = self.detail.find('\n')
             self.exit_price = float(self.detail[exit_price_init_index + 1:exit_price_last_index])
+            self.detail = self.detail[exit_price_last_index + 1:]
         # Entry time detail
         entry_time_init_index = self.detail.find(':') + 2
         entry_time_last_index = self.detail.find('\n')
@@ -139,10 +140,11 @@ class extractValues:
         return self.call_action
 
     def get_company_name(self):
-        if self.mini < 6:
-            return self.company_name
-        else:
-            return None
+        # reformate this after u enable stock qupte finder
+        # if self.mini < 6:
+        return self.company_name
+        # else:
+        # return None
 
     # def get_company_quote(self):
     #     return self.my_stock

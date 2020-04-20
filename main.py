@@ -11,7 +11,7 @@ def start():
         procap = website()
         procap.login()
     except Exception as e:
-        logger.error("error while opening website and login : "+e.__str__())
+        logger.error("error while opening website and login : " + e.__str__())
         start()
         return
 
@@ -27,7 +27,7 @@ def start():
     while 1:
         time.sleep(2)
         # refresh list
-        try :
+        try:
             curr_list = procap.get_call()
         except Exception as e:
             logger.error("Exception while refreshing call : " + e.__str__())
@@ -35,12 +35,12 @@ def start():
         refresh_count = refresh_count + 1
         if curr_list == prev_list:
             logger.info('getting pass')
-            pass
         else:
             new_call.reuse(curr_list)
             if curr_list[2].find('exit') is -1:
-                if (new_call.entry_time - datetime.now().time()).total_seconds() > 5*60:
-                    pass
+                if (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(),
+                                                                                               new_call.get_entry_time())).total_seconds() > 6 * 60:
+                    logger.info("Time limit exceeded")
                 else:
                     logger.info('Placing New order')
                     # Place new order
