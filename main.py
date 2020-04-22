@@ -44,13 +44,13 @@ def start():
                 else:
                     logger.info('Placing New order')
                     # Place new order
-                    logger.info('Action ' + new_call.get_call_action())
-                    logger.info('Company Name' + new_call.get_company_name())
+                    logger.info('Action {}'.format(new_call.get_call_action()))
+                    logger.info('Company Name{}'.format(new_call.get_company_name()))
                     # logger.info(call.get_company_quote())
-                    logger.info('Order Price ' + new_call.get_order_price())
-                    logger.info('Stop loss ' + new_call.get_stop_loss_price())
-                    logger.info('Target ' + new_call.get_target_price())
-                    logger.info('Exit ' + new_call.get_exit_price())
+                    logger.info('Order Price {}'.format(new_call.get_order_price()))
+                    logger.info('Stop loss {}'.format(new_call.get_stop_loss_price()))
+                    logger.info('Target {}'.format(new_call.get_target_price()))
+                    logger.info('Exit {}'.format(new_call.get_exit_price()))
                     # wait for the trade to exit
                     time.sleep(15 * 60)
             else:

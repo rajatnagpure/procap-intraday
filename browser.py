@@ -62,7 +62,7 @@ class website:
         soup = bs4.BeautifulSoup(self.browser.page_source, 'lxml')
         table = soup.table
         table_rows = table.find_all('tr')
-        tr = table_rows[2]
+        tr = table_rows[1]
         td = tr.find_all('td')
         row = [i.text for i in td]
         return row
