@@ -34,35 +34,35 @@ def start():
 
         refresh_count = refresh_count + 1
         if curr_list == prev_list:
-            logger.info('getting pass')
+            logger.critical('getting pass')
         else:
             new_call.reuse(curr_list)
             if curr_list[2].find('exit') is -1:
                 if (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(),
                                                                                                new_call.get_entry_time())).total_seconds() > 6 * 60:
-                    logger.info("Time limit exceeded")
+                    logger.critical("Time limit exceeded")
                 else:
-                    logger.info('Placing New order')
+                    logger.critical('Placing New order')
                     # Place new order
-                    logger.info('Action {}'.format(new_call.get_call_action()))
-                    logger.info('Company Name{}'.format(new_call.get_company_name()))
-                    # logger.info(call.get_company_quote())
-                    logger.info('Order Price {}'.format(new_call.get_order_price()))
-                    logger.info('Stop loss {}'.format(new_call.get_stop_loss_price()))
-                    logger.info('Target {}'.format(new_call.get_target_price()))
-                    logger.info('Exit {}'.format(new_call.get_exit_price()))
+                    logger.critical('Action {}'.format(new_call.get_call_action()))
+                    logger.critical('Company Name{}'.format(new_call.get_company_name()))
+                    # logger.critical()(call.get_company_quote())
+                    logger.critical('Order Price {}'.format(new_call.get_order_price()))
+                    logger.critical('Stop loss {}'.format(new_call.get_stop_loss_price()))
+                    logger.critical('Target {}'.format(new_call.get_target_price()))
+                    logger.critical('Exit {}'.format(new_call.get_exit_price()))
                     # wait for the trade to exit
-                    time.sleep(15 * 60)
+                    time.sleep(5 * 60)
             else:
-                logger.info('Exiting previously placed order')
+                logger.critical('Exiting previously placed order')
             prev_list = copy.deepcopy(curr_list)
 
         if datetime.now().time() > square_off_time:
             # Place Square Off orders
-            logger.info('placing square off orders')
+            logger.critical('placing square off orders')
             time.sleep(10)
-            logger.info('Refresh Count is : {}'.format(refresh_count))
-            logger.info('Exit and Out')
+            logger.critical('Refresh Count is : {}'.format(refresh_count))
+            logger.critical('Exit and Out')
             procap.stop_browser()
             break
 

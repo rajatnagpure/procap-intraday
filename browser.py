@@ -39,7 +39,7 @@ class website:
             username_box.send_keys(Username)
             password_box.send_keys(Password)
             login_button.click()
-            logger.info('Login Successful')
+            logger.critical('Login Successful')
             print('Login Successful')
 
         except Exception as e:

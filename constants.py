@@ -7,14 +7,14 @@ Zerodha_api_secret = ""
 Zerodha_request_token = ""
 
 # Market timing for live
-market_opening_time = time(9, 15, 0)
-square_off_time = time(15, 10, 0)
+market_opening_time = time(5, 15, 0)
+square_off_time = time(16, 10, 0)
 market_closing_time = time(15,20, 0)
 
 # Logging info and things
 LOG_FORMAT = "%(levelname)s ::: %(asctime)s ::: %(message)s"
 logging.basicConfig(filename=r"./log.txt",
-                    level=logging.DEBUG,
+                    level=logging.CRITICAL,
                     format=LOG_FORMAT,
                     filemode='w')
 logger = logging.getLogger()
