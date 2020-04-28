@@ -1,18 +1,24 @@
-CRITICAL ::: 2020-04-23 16:04:19,913 ::: Login Successful
-CRITICAL ::: 2020-04-23 16:04:28,411 ::: getting pass
-CRITICAL ::: 2020-04-23 16:04:32,549 ::: getting pass
-CRITICAL ::: 2020-04-23 16:04:39,705 ::: getting pass
-CRITICAL ::: 2020-04-23 16:04:42,775 ::: getting pass
-CRITICAL ::: 2020-04-23 16:04:46,251 ::: getting pass
-CRITICAL ::: 2020-04-23 16:04:50,362 ::: getting pass
-CRITICAL ::: 2020-04-23 16:04:55,372 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:00,831 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:04,338 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:08,365 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:12,239 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:19,868 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:24,882 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:32,942 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:37,649 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:40,735 ::: getting pass
-CRITICAL ::: 2020-04-23 16:05:45,400 ::: getting pass
+CRITICAL ::: 2020-04-28 10:10:58,192 ::: Login Successful
+CRITICAL ::: 2020-04-28 10:11:00,841 ::: Problem extracting target price calculating our own could not convert string to float: ' tgt 490'
+CRITICAL ::: 2020-04-28 10:11:00,843 ::: Action SELL
+CRITICAL ::: 2020-04-28 10:11:00,843 ::: Company Namesun pharma
+CRITICAL ::: 2020-04-28 10:11:00,843 ::: Order Price 493.0
+CRITICAL ::: 2020-04-28 10:11:00,843 ::: Stop loss 495.05
+CRITICAL ::: 2020-04-28 10:11:00,843 ::: Target 490.0
+CRITICAL ::: 2020-04-28 10:11:00,843 ::: Exit -1.0
+CRITICAL ::: 2020-04-28 10:11:04,177 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:07,647 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:10,142 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:12,825 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:14,826 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:16,798 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:19,997 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:23,077 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:25,166 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:27,189 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:29,461 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:32,828 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:35,114 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:37,361 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:39,442 ::: getting pass
+CRITICAL ::: 2020-04-28 10:11:41,381 ::: getting pass

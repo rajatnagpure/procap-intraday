@@ -13,22 +13,51 @@ def get_all_matches(input_list, subs):
 
 class extractValues:
     def __init__(self, row_call_detail):
-        self.detail = row_call_detail[2]
+        self.detail = row_call_detail[2]  # 'sell infy @637, sl @640.05, tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
+        # Getting company name
         company_name_init_index = self.detail.find(' ') + 1
         company_name_last_index = self.detail.find('@') - 1
         self.company_name = self.detail[company_name_init_index:company_name_last_index]
+        # Modify detail string. New string - '637, sl @640.05, tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
         self.detail = self.detail[company_name_last_index + 2:]
+        # Getting Order price
         order_price_last_index = self.detail.find(',')
-        self.order_price = float(self.detail[0:order_price_last_index])
+        try:
+            self.order_price = float(self.detail[0:order_price_last_index])
+        except ValueError as e:
+            logger.critical("Problem extracting order price " + e.__str__())
+            self.order_price = -1
+        # Modify detail string. New String - 'sl @640.05, tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
         self.detail = self.detail[order_price_last_index + 1:]
+        # Getting stop loss price.
         stop_loss_price_init_index = self.detail.find('@')
         stop_loss_price_last_index = self.detail.find(',')
-        self.stop_loss_price = float(self.detail[stop_loss_price_init_index + 1:stop_loss_price_last_index])
+        try:
+            self.stop_loss_price = float(self.detail[stop_loss_price_init_index + 1:stop_loss_price_last_index])
+        except ValueError as e:
+            logger.critical("Problem extracting stop loss calculating our own " + e.__str__())
+            if row_call_detail[1] == 'SELL':
+                self.stop_loss_price = self.order_price + 2
+            else:
+                self.stop_loss_price = self.order_price - 2
+
+        # Modify details string. New String- 'tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
         self.detail = self.detail[stop_loss_price_last_index + 1:]
         if self.detail.find('exit') == -1:
             target_price_init_index = self.detail.find('@')
             target_price_last_index = self.detail.find('\n')
-            self.target_price = float(self.detail[target_price_init_index + 1:target_price_last_index])
+            try:
+                self.target_price = float(self.detail[target_price_init_index + 1:target_price_last_index])
+            except ValueError as e:
+                logger.critical("Problem extracting target price calculating our own " + e.__str__())
+                if row_call_detail[1] == 'SELL':
+                    self.target_price = self.order_price - 3
+                else:
+                    self.target_price = self.order_price + 3
             self.detail = self.detail[target_price_last_index + 1:]
             self.exit_price = -1.0
         else:
@@ -36,22 +65,43 @@ class extractValues:
             target_price_decimal = self.detail.find('.')
             next_dot_index = self.detail[target_price_decimal + 1:].find('.') + target_price_decimal + 1
             if target_price_decimal + 1 == next_dot_index:
-                self.target_price = float(self.detail[target_price_init_index + 1:target_price_decimal])
+                try:
+                    self.target_price = float(self.detail[target_price_init_index + 1:target_price_decimal])
+                except ValueError as e:
+                    logger.critical("Problem extracting target price calculating our own " + e.__str__())
+                    if row_call_detail[1] == 'SELL':
+                        self.target_price = self.target_price - 3
+                    else:
+                        self.target_price = self.target_price + 3
             else:
-                self.target_price = float(self.detail[target_price_init_index + 1:next_dot_index])
+                try:
+                    self.target_price = float(self.detail[target_price_init_index + 1:next_dot_index])
+                except ValueError as e:
+                    logger.critical("Problem extracting target price calculating our own " + e.__str__())
+                    if row_call_detail[1] == 'SELL':
+                        self.target_price = self.target_price - 3
+                    else:
+                        self.target_price = self.target_price + 3
             self.detail = self.detail[next_dot_index:]
             exit_price_init_index = self.detail.find('@')
             exit_price_last_index = self.detail.find('\n')
-            self.exit_price = float(self.detail[exit_price_init_index + 1:exit_price_last_index])
+            try:
+                self.exit_price = float(self.detail[exit_price_init_index + 1:exit_price_last_index])
+            except ValueError as e:
+                logger.critical("Problem extracting Exit value " + e.__str__())
+                self.exit_price = -1
             self.detail = self.detail[exit_price_last_index + 1:]
+        # ---------------------------------------------------------------------------------------------------------- #
         # Entry time detail
         entry_time_init_index = self.detail.find(':') + 2
         entry_time_last_index = self.detail.find('\n')
         entry_time_str = self.detail[entry_time_init_index:entry_time_last_index]
         str_format = '%I:%M %p'
         self.entry_time = datetime.strptime(entry_time_str, str_format).time()
+        # ---------------------------------------------------------------------------------------------------------- #
         # some other detail
         self.call_action = row_call_detail[1]
+        # ---------------------------------------------------------------------------------------------------------- #
         # getting stock Symbol or Ticker out of company name
         # it might be wrong and will return None if went wrong
         # it uses function get_all_matches
@@ -75,22 +125,51 @@ class extractValues:
         #     logger.error('Exception Message'+e.__str__())
 
     def reuse(self, row_call_detail):
-        self.detail = row_call_detail[2]
+        self.detail = row_call_detail[2]  # 'sell infy @637, sl @640.05, tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
+        # Getting company name
         company_name_init_index = self.detail.find(' ') + 1
         company_name_last_index = self.detail.find('@') - 1
         self.company_name = self.detail[company_name_init_index:company_name_last_index]
+        # Modify detail string. New string - '637, sl @640.05, tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
         self.detail = self.detail[company_name_last_index + 2:]
+        # Getting Order price
         order_price_last_index = self.detail.find(',')
-        self.order_price = float(self.detail[0:order_price_last_index])
+        try:
+            self.order_price = float(self.detail[0:order_price_last_index])
+        except ValueError as e:
+            logger.critical("Problem extracting order price " + e.__str__())
+            self.order_price = -1
+        # Modify detail string. New String - 'sl @640.05, tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
         self.detail = self.detail[order_price_last_index + 1:]
+        # Getting stop loss price.
         stop_loss_price_init_index = self.detail.find('@')
         stop_loss_price_last_index = self.detail.find(',')
-        self.stop_loss_price = float(self.detail[stop_loss_price_init_index + 1:stop_loss_price_last_index])
+        try:
+            self.stop_loss_price = float(self.detail[stop_loss_price_init_index + 1:stop_loss_price_last_index])
+        except ValueError as e:
+            logger.critical("Problem extracting stop loss calculating our own " + e.__str__())
+            if row_call_detail[1] == 'SELL':
+                self.stop_loss_price = self.order_price + 2
+            else:
+                self.stop_loss_price = self.order_price - 2
+
+        # Modify details string. New String- 'tgt @632.50\nTime Call Posted : 10:51
+        # am\nTime Call hit : 11:31 am\n'
         self.detail = self.detail[stop_loss_price_last_index + 1:]
         if self.detail.find('exit') == -1:
             target_price_init_index = self.detail.find('@')
             target_price_last_index = self.detail.find('\n')
-            self.target_price = float(self.detail[target_price_init_index + 1:target_price_last_index])
+            try:
+                self.target_price = float(self.detail[target_price_init_index + 1:target_price_last_index])
+            except ValueError as e:
+                logger.critical("Problem extracting target price calculating our own " + e.__str__())
+                if row_call_detail[1] == 'SELL':
+                    self.target_price = self.order_price - 3
+                else:
+                    self.target_price = self.order_price + 3
             self.detail = self.detail[target_price_last_index + 1:]
             self.exit_price = -1.0
         else:
@@ -98,22 +177,43 @@ class extractValues:
             target_price_decimal = self.detail.find('.')
             next_dot_index = self.detail[target_price_decimal + 1:].find('.') + target_price_decimal + 1
             if target_price_decimal + 1 == next_dot_index:
-                self.target_price = float(self.detail[target_price_init_index + 1:target_price_decimal])
+                try:
+                    self.target_price = float(self.detail[target_price_init_index + 1:target_price_decimal])
+                except ValueError as e:
+                    logger.critical("Problem extracting target price calculating our own " + e.__str__())
+                    if row_call_detail[1] == 'SELL':
+                        self.target_price = self.target_price - 3
+                    else:
+                        self.target_price = self.target_price + 3
             else:
-                self.target_price = float(self.detail[target_price_init_index + 1:next_dot_index])
+                try:
+                    self.target_price = float(self.detail[target_price_init_index + 1:next_dot_index])
+                except ValueError as e:
+                    logger.critical("Problem extracting target price calculating our own " + e.__str__())
+                    if row_call_detail[1] == 'SELL':
+                        self.target_price = self.target_price - 3
+                    else:
+                        self.target_price = self.target_price + 3
             self.detail = self.detail[next_dot_index:]
             exit_price_init_index = self.detail.find('@')
             exit_price_last_index = self.detail.find('\n')
-            self.exit_price = float(self.detail[exit_price_init_index + 1:exit_price_last_index])
+            try:
+                self.exit_price = float(self.detail[exit_price_init_index + 1:exit_price_last_index])
+            except ValueError as e:
+                logger.critical("Problem extracting Exit value " + e.__str__())
+                self.exit_price = -1
             self.detail = self.detail[exit_price_last_index + 1:]
+        # ---------------------------------------------------------------------------------------------------------- #
         # Entry time detail
         entry_time_init_index = self.detail.find(':') + 2
         entry_time_last_index = self.detail.find('\n')
         entry_time_str = self.detail[entry_time_init_index:entry_time_last_index]
         str_format = '%I:%M %p'
         self.entry_time = datetime.strptime(entry_time_str, str_format).time()
+        # ---------------------------------------------------------------------------------------------------------- #
         # some other detail
         self.call_action = row_call_detail[1]
+        # ---------------------------------------------------------------------------------------------------------- #
         # getting stock Symbol or Ticker out of company name
         # it might be wrong and will return None if went wrong
         # it uses function get_all_matches
@@ -134,7 +234,7 @@ class extractValues:
         #             self.mini = q
         #             self.my_stock = i
         # except Exception as e:
-        #     logger.error('Exception Message' + e.__str__())
+        #     logger.error('Exception Message'+e.__str__())
 
     def get_call_action(self):
         return self.call_action
