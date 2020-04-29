@@ -40,6 +40,11 @@ def start():
             curr_list = procap.get_call()
         except Exception as e:
             logger.critical("Exception while refreshing call : " + e.__str__())
+            procap.stop_browser()
+            time.sleep(500)
+            logger.critical("starting browser again")
+            start()
+            return
 
         refresh_count = refresh_count + 1
         if curr_list == prev_list:
@@ -54,7 +59,7 @@ def start():
 
             if curr_list[2].find('exit') is -1:
                 if (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(),
-                                                                                               new_call.get_entry_time())).total_seconds() > 6 * 60:
+                                                                                               new_call.get_entry_time())).total_seconds() > 60:
                     logger.critical("Time limit exceeded")
                 else:
                     if new_call.order_price != -1:
