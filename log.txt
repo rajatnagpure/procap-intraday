@@ -1,0 +1,11 @@
+CRITICAL ::: 2020-04-30 16:43:26,687 ::: Login Successful
+CRITICAL ::: 2020-04-30 16:43:30,310 ::: Action SELL
+CRITICAL ::: 2020-04-30 16:43:30,311 ::: Company Namereliance
+CRITICAL ::: 2020-04-30 16:43:30,311 ::: Order Price 1475.5
+CRITICAL ::: 2020-04-30 16:43:30,311 ::: Stop loss 1480.05
+CRITICAL ::: 2020-04-30 16:43:30,311 ::: Target 1468.0
+CRITICAL ::: 2020-04-30 16:43:30,311 ::: Exit -1.0
+CRITICAL ::: 2020-04-30 16:43:50,902 ::: getting pass
+CRITICAL ::: 2020-04-30 16:43:50,902 ::: placing square off orders
+CRITICAL ::: 2020-04-30 16:44:00,912 ::: Refresh Count is : 1
+CRITICAL ::: 2020-04-30 16:44:00,912 ::: Exit and Out

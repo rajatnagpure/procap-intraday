@@ -58,12 +58,13 @@ def start():
                 continue
 
             if curr_list[2].find('exit') is -1:
-                if (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(),
-                                                                                               new_call.get_entry_time())).total_seconds() > 60:
-                    logger.critical("Time limit exceeded")
+                tle = (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(), new_call.get_entry_time())).total_seconds()
+                if tle > 240:
+                    logger.critical("Time limit exceeded by {} secs".format(tle))
                 else:
                     if new_call.order_price != -1:
                         logger.critical('Placing New order')
+                        logger.critical("Time passed by {} secs".format(tle))
                         # Place new order
                         logger.critical('Action {}'.format(new_call.get_call_action()))
                         logger.critical('Company Name{}'.format(new_call.get_company_name()))
