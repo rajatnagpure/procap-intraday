@@ -1,11 +1,17 @@
-CRITICAL ::: 2020-04-30 16:43:26,687 ::: Login Successful
-CRITICAL ::: 2020-04-30 16:43:30,310 ::: Action SELL
-CRITICAL ::: 2020-04-30 16:43:30,311 ::: Company Namereliance
-CRITICAL ::: 2020-04-30 16:43:30,311 ::: Order Price 1475.5
-CRITICAL ::: 2020-04-30 16:43:30,311 ::: Stop loss 1480.05
-CRITICAL ::: 2020-04-30 16:43:30,311 ::: Target 1468.0
-CRITICAL ::: 2020-04-30 16:43:30,311 ::: Exit -1.0
-CRITICAL ::: 2020-04-30 16:43:50,902 ::: getting pass
-CRITICAL ::: 2020-04-30 16:43:50,902 ::: placing square off orders
-CRITICAL ::: 2020-04-30 16:44:00,912 ::: Refresh Count is : 1
-CRITICAL ::: 2020-04-30 16:44:00,912 ::: Exit and Out
+CRITICAL ::: 2020-05-25 14:47:24,463 ::: Login Successful
+CRITICAL ::: 2020-05-25 14:47:36,986 ::: ['22 May 2020', 'BUY', 'buy indusind bank @334, sl @331.95, tgt @337\nTime Call Posted : 02:11 pm\nTime Call hit : 2:22 pm\n']
+CRITICAL ::: 2020-05-25 14:47:36,986 ::: {'action': 'BUY', 'company_raw_text': 'indusind bank', 'close_match_list': ['INDUSINDBK'], 'order_price': 334.0, 'target_price': 337.0, 'stop_loss_price': 331.95, 'exit_price': -1.0, 'entry_time': datetime.time(14, 11)}
+CRITICAL ::: 2020-05-25 14:47:44,236 ::: getting pass
+CRITICAL ::: 2020-05-25 14:47:52,550 ::: getting pass
+CRITICAL ::: 2020-05-25 14:47:56,890 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:01,989 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:05,851 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:09,976 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:14,596 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:19,063 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:24,337 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:29,344 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:34,630 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:41,189 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:47,033 ::: getting pass
+CRITICAL ::: 2020-05-25 14:48:57,487 ::: getting pass

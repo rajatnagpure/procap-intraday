@@ -4,12 +4,14 @@ from extractvalues import *
 from datetime import datetime
 import time
 import copy
+import generateMISMultiplierDict
 
 
 def start():
     try:
         procap = website()
         procap.login()
+        generateMISMultiplierDict.generate_mis_multiplier_dict()
     except Exception as e:
         logger.error("error while opening website and login : " + e.__str__())
         start()
@@ -19,14 +21,8 @@ def start():
     curr_list = procap.get_call()
     prev_list = copy.deepcopy(curr_list)
     new_call = extractValues(curr_list)
-
-    logger.critical('Action {}'.format(new_call.get_call_action()))
-    logger.critical('Company Name{}'.format(new_call.get_company_name()))
-    # logger.critical()(call.get_company_quote())
-    logger.critical('Order Price {}'.format(new_call.get_order_price()))
-    logger.critical('Stop loss {}'.format(new_call.get_stop_loss_price()))
-    logger.critical('Target {}'.format(new_call.get_target_price()))
-    logger.critical('Exit {}'.format(new_call.get_exit_price()))
+    logger.critical(curr_list)
+    logger.critical(new_call.get_call_dict())
 
     refresh_count = 0
 
@@ -63,16 +59,7 @@ def start():
                     logger.critical("Time limit exceeded by {} secs".format(tle))
                 else:
                     if new_call.order_price != -1:
-                        logger.critical('Placing New order')
-                        logger.critical("Time passed by {} secs".format(tle))
-                        # Place new order
-                        logger.critical('Action {}'.format(new_call.get_call_action()))
-                        logger.critical('Company Name{}'.format(new_call.get_company_name()))
-                        # logger.critical()(call.get_company_quote())
-                        logger.critical('Order Price {}'.format(new_call.get_order_price()))
-                        logger.critical('Stop loss {}'.format(new_call.get_stop_loss_price()))
-                        logger.critical('Target {}'.format(new_call.get_target_price()))
-                        logger.critical('Exit {}'.format(new_call.get_exit_price()))
+                        logger.critical(new_call.get_call_dict())
                         # wait for the trade to exit
                         time.sleep(5 * 60)
             else:

@@ -1,7 +1,8 @@
-beautifulsoup4>=4.9.0
-lxml>=4.5.0
+beautifulsoup4>=4.9.1
+lxml>=4.5.1
 pyvirtualdisplay>=0.2.5
 selenium>=3.141.0
 kiteconnect>=3.8.2
 nsetools>=1.0.11
 service_identity>=18.1.0
+requests>=2.23.0

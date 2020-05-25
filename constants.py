@@ -2,13 +2,16 @@ from datetime import time
 import logging
 
 # Zerodha API Info
-zerodha_api_key = ""
-Zerodha_api_secret = ""
-Zerodha_request_token = ""
+zerodha_id = "XY5030"
+zerodha_password = "Rajat@321"
+zerodha_pin = "270519"
+zerodha_api_key = "gytb639zxx8wupdk"
+zerodha_api_secret = "7o5vxuncx1e8iwj6uomlvz4b55kei8wc"
+zerodha_access_token = ""
 
 # Market timing for live
 market_opening_time = time(5, 15, 0)
-square_off_time = time(16, 10, 0)
+square_off_time = time(15, 10, 0)
 market_closing_time = time(15,20, 0)
 
 # Logging info and things
@@ -32,6 +35,12 @@ NotificationProposeXpath = """//*[@id="onesignal-popover-allow-button"]"""
 CallTableRow = """//*[@id="responsecontainer"]/div/table/tbody/tr[1]/td[1]"""
 Username = "rajatnagpure.rn@gmail.com"
 Password = "Rajat@321"
+
+# Used in generateMISMultiplierDict.py
+margin_calculator_page_url = "https://zerodha.com/margin-calculator/Equity/"
+
+# GLOBAL DATA SECTION
+mis_multipliers = {}
 all_company_quotes = ['symbol', 'nameofcompany', '20microns', '20micronslimited', '21stcenmgm',
                       '21stcenturymanagementserviceslimited', '3iinfotech', '3iinfotechlimited', '3mindia',
                       '3mindialimited', '3pland', '3plandholdingslimited', '5paisa', '5paisacapitallimited', '63moons',

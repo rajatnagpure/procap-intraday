@@ -65,7 +65,7 @@ class website:
         tr = table_rows[1]
         td = tr.find_all('td')
         row = [i.text for i in td]
-        return row
+        return row[:-2]
 
     def stop_browser(self):
         self.browser.quit()

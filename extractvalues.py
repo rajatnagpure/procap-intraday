@@ -1,4 +1,4 @@
-from nsetools import Nse
+# from nsetools import Nse
 from constants import *
 from datetime import datetime
 
@@ -105,13 +105,14 @@ class extractValues:
         # getting stock Symbol or Ticker out of company name
         # it might be wrong and will return None if went wrong
         # it uses function get_all_matches
-        # close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
-        # close_match_fin = []
-        # for i in close_matches:
-        #     number = all_company_quotes.index(i)
-        #     if number % 2 != 0:
-        #         number = number - 1
-        #     close_match_fin.append(all_company_quotes[number])
+        close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
+        close_match_fin = []
+        for i in close_matches:
+            number = all_company_quotes.index(i)
+            if number % 2 != 0:
+                number = number - 1
+            close_match_fin.append(all_company_quotes[number])
+        self.close_match_list = [i.upper() for i in close_match_fin]
         # self.mini = 100
         # self.my_stock = close_match_fin[0]
         # try:
@@ -144,6 +145,7 @@ class extractValues:
         # Modify detail string. New String - 'sl @640.05, tgt @632.50\nTime Call Posted : 10:51
         # am\nTime Call hit : 11:31 am\n'
         self.detail = self.detail[order_price_last_index + 1:]
+
         # Getting stop loss price.
         stop_loss_price_init_index = self.detail.find('@')
         stop_loss_price_last_index = self.detail.find(',')
@@ -217,13 +219,14 @@ class extractValues:
         # getting stock Symbol or Ticker out of company name
         # it might be wrong and will return None if went wrong
         # it uses function get_all_matches
-        # close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
-        # close_match_fin = []
-        # for i in close_matches:
-        #     number = all_company_quotes.index(i)
-        #     if number % 2 != 0:
-        #         number = number - 1
-        #     close_match_fin.append(all_company_quotes[number])
+        close_matches = get_all_matches(all_company_quotes, self.company_name.lower().replace(" ", ""))
+        close_match_fin = []
+        for i in close_matches:
+            number = all_company_quotes.index(i)
+            if number % 2 != 0:
+                number = number - 1
+            close_match_fin.append(all_company_quotes[number])
+        self.close_match_list = [i.upper() for i in close_match_fin]
         # self.mini = 100
         # self.my_stock = close_match_fin[0]
         # try:
@@ -240,14 +243,10 @@ class extractValues:
         return self.call_action
 
     def get_company_name(self):
-        # reformate this after u enable stock qupte finder
-        # if self.mini < 6:
         return self.company_name
-        # else:
-        # return None
 
-    # def get_company_quote(self):
-    #     return self.my_stock
+    def get_close_company_quote_list(self):
+        return self.close_match_list
 
     def get_order_price(self):
         return self.order_price
@@ -263,3 +262,9 @@ class extractValues:
 
     def get_entry_time(self):
         return self.entry_time
+
+    def get_call_dict(self):
+        return {"action": self.call_action, "company_raw_text": self.company_name,
+                "close_match_list": self.close_match_list, "order_price": self.order_price,
+                "target_price": self.target_price, "stop_loss_price": self.stop_loss_price,
+                "exit_price": self.exit_price, "entry_time": self.entry_time}
