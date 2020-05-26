@@ -5,6 +5,7 @@ import json
 
 
 def generate_mis_multiplier_dict():
+    global mis_multipliers
     try:
         page = requests.get(margin_calculator_page_url)
         soup = bs4.BeautifulSoup(page.text, 'lxml')

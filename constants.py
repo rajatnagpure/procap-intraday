@@ -10,7 +10,7 @@ zerodha_api_secret = "7o5vxuncx1e8iwj6uomlvz4b55kei8wc"
 zerodha_access_token = ""
 
 # Market timing for live
-market_opening_time = time(5, 15, 0)
+market_opening_time = time(9, 15, 0)
 square_off_time = time(15, 10, 0)
 market_closing_time = time(15,20, 0)
 

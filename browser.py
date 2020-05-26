@@ -44,6 +44,8 @@ class website:
 
         except Exception as e:
             logger.error('failed to login {}'.format(str(e)))
+            self.login()
+            return
         # self.allow_notification()
         self.browser.get(IntradayURL)
 
@@ -66,6 +68,21 @@ class website:
         td = tr.find_all('td')
         row = [i.text for i in td]
         return row[:-2]
+
+    def get_specific_call(self,company_name):
+        self.browser.refresh()
+        self.wait.until(lambda driver: self.browser.find_element_by_xpath(CallTableRow))
+        soup = bs4.BeautifulSoup(self.browser.page_source, 'lxml')
+        table = soup.table
+        table_rows = table.find_all('tr')
+        tr = table_rows[1]
+        for trs in table_rows:
+            all_tds = trs.fins_all('td')[2].text
+            if all_tds.find(company_name) != -1:
+                tr = trs
+        td = tr.find_all('td')
+        row = [i.text for i in td]
+        return row
 
     def stop_browser(self):
         self.browser.quit()
