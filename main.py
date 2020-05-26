@@ -189,7 +189,7 @@ def start():
             else:
                 if new_call.order_price != -1:
                     # placing oder
-                    place_bo_order(new_call.get_call_dict())
+                    place_co_order(new_call.get_call_dict())
                     logger.critical(new_call.get_call_dict())
 
             prev_list = copy.deepcopy(curr_list)
