@@ -1,5 +1,5 @@
 from extractvalues import *
-import datetime
+from datetime import datetime
 from time import sleep
 import copy
 from browser import *
@@ -49,7 +49,7 @@ def get_access_token():
     logger.critical("Access Token {}".format(zerodha_access_token))
     at_dict = {}
     at_dict["access_token"] = zerodha_access_token
-    at_dict["time"] = datetime.datetime.now().strftime("%m/%d/%Y")
+    at_dict["time"] = datetime.now().strftime("%m/%d/%Y")
     try:
         with open('access_token.json', 'w') as json_file:
             json.dump(at_dict, json_file)
@@ -95,13 +95,9 @@ def place_bo_order(order_detail):
                          kite.PRODUCT_MIS,
                          kite.ORDER_TYPE_LIMIT,
                          price=order_price,
-                         validity=None,
                          disclosed_quantity=None,
-                         trigger_price=None,
                          squareoff=target_price,
-                         stoploss=stop_loss_price,
-                         trailing_stoploss=None,
-                         tag=None)
+                         stoploss=stop_loss_price)
     except Exception as e:
         logger.critical("Problem Placing order: {}".format(e))
         place_bo_order(order_detail)
@@ -124,13 +120,7 @@ def place_co_order(order_detail):
                          kite.PRODUCT_MIS,
                          kite.ORDER_TYPE_LIMIT,
                          price=order_price,
-                         validity=None,
-                         disclosed_quantity=None,
-                         trigger_price=None,
-                         squareoff=None,
-                         stoploss=stop_loss_price,
-                         trailing_stoploss=None,
-                         tag=None)
+                         trigger_price=stop_loss_price)
     except Exception as e:
         logger.critical("Problem Placing order: {}".format(e))
         place_bo_order(order_detail)
@@ -157,7 +147,7 @@ def start():
 
     refresh_count = 0
 
-    while datetime.datetime.now().time() < market_opening_time:
+    while datetime.now().time() < market_opening_time:
         sleep(1)
     print('started')
     while 1:
@@ -206,7 +196,7 @@ def start():
                     pass
             prev_list = copy.deepcopy(curr_list)
 
-        if datetime.datetime.now().time() > square_off_time:
+        if datetime.now().time() > square_off_time:
             logger.critical('Refresh Count is : {}'.format(refresh_count))
             logger.critical('Exit and Out')
             break
