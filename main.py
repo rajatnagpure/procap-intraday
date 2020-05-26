@@ -146,6 +146,8 @@ def place_co_order(order_detail):
 
 def start():
     global procap
+    procap = website()
+    procap.login()
     # list and calls
     curr_list = procap.get_call()
     prev_list = copy.deepcopy(curr_list)
@@ -182,16 +184,26 @@ def start():
                 prev_list = copy.deepcopy(curr_list)
                 continue
 
-            tle = (datetime.datetime.combine(datetime.datetime.now(), datetime.datetime.now().time()) - datetime.datetime.combine(datetime.datetime.now(),
-                                                                                              new_call.get_entry_time())).total_seconds()
-            if tle > 240:
-                logger.critical("Time limit exceeded by {} secs".format(tle))
+            if curr_list[2].find('exit') is -1:
+                tle = (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(),
+                                                                                                  new_call.get_entry_time())).total_seconds()
+                if tle > 240:
+                    logger.critical("Time limit exceeded by {} secs".format(tle))
+                else:
+                    if new_call.order_price != -1:
+                        logger.critical('Placing New order')
+                        placing_call = new_call.get_call_dict()
+                        place_co_order(placing_call)
+                        logger.critica(placing_call)                   # wait for the trade to exit
+                        sleep(5 * 60)
             else:
-                if new_call.order_price != -1:
-                    # placing oder
-                    place_co_order(new_call.get_call_dict())
-                    logger.critical(new_call.get_call_dict())
-
+                logger.critical('Exiting previously placed order')
+                if new_call.exit_price == -1:
+                    # Exit on MARKET PRICE
+                    pass
+                else:
+                    # Exit on LIMIT PRICE
+                    pass
             prev_list = copy.deepcopy(curr_list)
 
         if datetime.datetime.now().time() > square_off_time:
@@ -201,9 +213,6 @@ def start():
 
 
 def init():
-    global procap
-    procap = website()
-    procap.login()
     generateMISMultiplierDict.generate_mis_multiplier_dict()
     global kite
     kite = KiteConnect(api_key=zerodha_api_key)
