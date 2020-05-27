@@ -47,14 +47,12 @@ def get_access_token():
     global zerodha_access_token
     zerodha_access_token = data["access_token"]
     logger.critical("Access Token {}".format(zerodha_access_token))
-    at_dict = {}
-    at_dict["access_token"] = zerodha_access_token
-    at_dict["time"] = datetime.now().strftime("%m/%d/%Y")
+    at_dict = {"access_token": zerodha_access_token, "time": datetime.now().strftime("%m/%d/%Y")}
     try:
         with open('access_token.json', 'w') as json_file:
             json.dump(at_dict, json_file)
     except Exception as e:
-        logger.critical("Problem dumping access Token into json file")
+        logger.critical("Problem dumping access Token into json file: {}".format(e))
 
 
 def invalidate_access_token():
@@ -109,7 +107,7 @@ def place_co_order(order_detail):
     order_price = order_detail["order_price"]
     target_price = order_detail["target_price"]
     stop_loss_price = order_detail["stop_loss_price"]
-    stock_quote = get_company_quote(order_detail["close_match_list"])
+    stock_quote = get_company_quote(order_detail["close_match_list"], order_price)
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
         kite.place_order(kite.VARIETY_CO,
