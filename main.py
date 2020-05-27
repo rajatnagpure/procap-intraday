@@ -72,9 +72,9 @@ def get_company_quote(close_match_list, order_price):
 
 def get_mis_buyable_quantity(stock_quote, order_price):
     total_margin_available = kite.margins()["equity"]["net"]
-    cnc_quantity = total_margin_available / order_price
     mis_multi = mis_multipliers[stock_quote]
-    return int(cnc_quantity * mis_multi)
+    total_quantity = int((total_margin_available * mis_multi) / order_price)
+    return total_quantity
 
 
 def place_bo_order(order_detail):
@@ -141,7 +141,8 @@ def start():
     prev_list = copy.deepcopy(curr_list)
     new_call = extractValues(curr_list)
     logger.critical(curr_list)
-    logger.critical(new_call.get_call_dict())
+    placing_call = new_call.get_call_dict()
+    logger.critical(placing_call)
 
     refresh_count = 0
 
