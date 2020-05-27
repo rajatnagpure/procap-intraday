@@ -1,8 +1,6 @@
-CRITICAL ::: 2020-05-26 15:11:34,397 ::: Probelm generating access token: `request_token` should be minimum 10 characters in length.
-CRITICAL ::: 2020-05-26 15:11:37,628 ::: Access Token Hu538bIX8XitmA0XMZSLdetzMWH5cYpO
-CRITICAL ::: 2020-05-26 15:11:45,973 ::: Login Successful
-CRITICAL ::: 2020-05-26 15:11:50,784 ::: ['26 May 2020', 'SELL', 'sell tata steel @282.50, sl @284.50, tgt @279.50\nTime Call Posted : 01:30 pm\nTime Call hit : 02:28 pm\n']
-CRITICAL ::: 2020-05-26 15:11:50,784 ::: {'action': 'SELL', 'company_raw_text': 'tata steel', 'close_match_list': ['TATASTEEL', 'TATASTEEL', 'TATASTLBSL', 'TATASTLLP'], 'order_price': 282.5, 'target_price': 279.5, 'stop_loss_price': 284.5, 'exit_price': -1.0, 'entry_time': datetime.time(13, 30)}
-CRITICAL ::: 2020-05-26 15:11:59,569 ::: getting pass
-CRITICAL ::: 2020-05-26 15:11:59,569 ::: Refresh Count is : 1
-CRITICAL ::: 2020-05-26 15:11:59,569 ::: Exit and Out
+CRITICAL ::: 2020-05-27 06:41:32,721 ::: Probelm generating access token: `request_token` should be minimum 10 characters in length.
+CRITICAL ::: 2020-05-27 06:41:37,664 ::: Probelm generating access token: `request_token` should be minimum 10 characters in length.
+CRITICAL ::: 2020-05-27 06:41:41,545 ::: Access Token qywfPVtHcO7NTmCmJtf5Aj4WrheMQ4eI
+CRITICAL ::: 2020-05-27 06:41:55,143 ::: Login Successful
+CRITICAL ::: 2020-05-27 06:41:58,478 ::: ['26 May 2020', 'SELL', 'sell tata steel @282.50, sl @284.50, tgt @279.50\nTime Call Posted : 01:30 pm\nTime Call hit : 2:14 pm\n']
+CRITICAL ::: 2020-05-27 06:41:58,478 ::: {'action': 'SELL', 'company_raw_text': 'tata steel', 'close_match_list': ['TATASTEEL', 'TATASTEEL', 'TATASTLBSL', 'TATASTLLP'], 'order_price': 282.5, 'target_price': 279.5, 'stop_loss_price': 284.5, 'exit_price': -1.0, 'entry_time': datetime.time(13, 30)}
