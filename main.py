@@ -82,7 +82,7 @@ def place_bo_order(order_detail):
     order_price = order_detail["order_price"]
     target_price = order_detail["target_price"]
     stop_loss_price = order_detail["stop_loss_price"]
-    stock_quote = get_company_quote(order_detail["close_match_list"])
+    stock_quote = get_company_quote(order_detail["close_match_list"], order_price)
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
         kite.place_order(kite.VARIETY_BO,
