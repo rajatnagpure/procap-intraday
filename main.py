@@ -195,7 +195,7 @@ def start():
                         logger.critical('Placing New order')
                         placing_call = new_call.get_call_dict()
                         place_co_order(placing_call)
-                        logger.critica(placing_call)                   # wait for the trade to exit
+                        logger.critical(placing_call)                   # wait for the trade to exit
                         sleep(5 * 60)
             else:
                 logger.critical('Exiting previously placed order')
