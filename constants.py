@@ -8,6 +8,7 @@ zerodha_pin = "270519"
 zerodha_api_key = "gytb639zxx8wupdk"
 zerodha_api_secret = "7o5vxuncx1e8iwj6uomlvz4b55kei8wc"
 zerodha_access_token = ""
+process_calculation_margin = 0.3
 
 # Market timing for live
 market_opening_time = time(7, 15, 0)

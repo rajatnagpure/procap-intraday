@@ -79,9 +79,15 @@ def get_mis_buyable_quantity(stock_quote, order_price):
 
 def place_bo_order(order_detail):
     action = order_detail["action"]
-    order_price = order_detail["order_price"]
-    target_price = order_detail["target_price"]
-    stop_loss_price = order_detail["stop_loss_price"]
+    if action is "BUY":
+        order_price = order_detail["order_price"] + process_calculation_margin
+        target_price = order_detail["target_price"] + process_calculation_margin
+        stop_loss_price = order_detail["stop_loss_price"] + process_calculation_margin
+    else:
+        order_price = order_detail["order_price"] - process_calculation_margin
+        target_price = order_detail["target_price"] - process_calculation_margin
+        stop_loss_price = order_detail["stop_loss_price"] - process_calculation_margin
+
     stock_quote = get_company_quote(order_detail["close_match_list"], order_price)
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
@@ -104,9 +110,15 @@ def place_bo_order(order_detail):
 
 def place_co_order(order_detail):
     action = order_detail["action"]
-    order_price = order_detail["order_price"]
-    target_price = order_detail["target_price"]
-    stop_loss_price = order_detail["stop_loss_price"]
+    if action is "BUY":
+        order_price = order_detail["order_price"] + process_calculation_margin
+        target_price = order_detail["target_price"] + process_calculation_margin
+        stop_loss_trigger = order_detail["stop_loss_price"] + process_calculation_margin
+    else:
+        order_price = order_detail["order_price"] - process_calculation_margin
+        target_price = order_detail["target_price"] - process_calculation_margin
+        stop_loss_trigger = order_detail["stop_loss_price"] - process_calculation_margin
+
     stock_quote = get_company_quote(order_detail["close_match_list"], order_price)
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
@@ -118,7 +130,7 @@ def place_co_order(order_detail):
                          kite.PRODUCT_MIS,
                          kite.ORDER_TYPE_LIMIT,
                          price=order_price,
-                         trigger_price=stop_loss_price)
+                         trigger_price=stop_loss_trigger)
     except Exception as e:
         logger.critical("Problem Placing order: {}".format(e))
         place_bo_order(order_detail)
