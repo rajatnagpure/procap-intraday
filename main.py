@@ -134,6 +134,8 @@ def place_co_order(order_detail):
     except Exception as e:
         logger.critical("Problem Placing order: {}".format(e))
         place_bo_order(order_detail)
+
+    logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:"+stock_quote)))
     # now looping for exit check
 
 
