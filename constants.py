@@ -11,7 +11,7 @@ zerodha_access_token = ""
 process_calculation_margin = 0.3
 
 # Market timing for live
-market_opening_time = time(7, 15, 0)
+market_opening_time = time(9, 15, 0)
 square_off_time = time(15, 10, 0)
 market_closing_time = time(15,20, 0)
 
@@ -27,15 +27,7 @@ logger = logging.getLogger()
 DISPLAY_FORMATE = 0
 
 # Procapital.Mohdfaiz.com site Info
-LoginURL = "https://procapital.mohdfaiz.com/login.php"
-IntradayURL = "https://procapital.mohdfaiz.com/intraday-calls.php"
-UsernameXpath = """//*[@id="panel_dn"]/div[2]/form/div[1]/div/input"""
-PasswordXpath = """//*[@id="panel_dn"]/div[2]/form/div[2]/div/input"""
-LoginButtonXpath = """//*[@id="panel_dn"]/div[2]/form/div[3]/div/input"""
-NotificationProposeXpath = """//*[@id="onesignal-popover-allow-button"]"""
-CallTableRow = """//*[@id="responsecontainer"]/div/table/tbody/tr[1]/td[1]"""
-Username = "rajatnagpure.rn@gmail.com"
-Password = "Rajat@321"
+TableURL = "https://procapital.mohdfaiz.com/ajax/intraCall/dataMain.php"
 
 # Used in generateMISMultiplierDict.py
 margin_calculator_page_url = "https://zerodha.com/margin-calculator/Equity/"

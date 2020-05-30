@@ -2,7 +2,7 @@ from extractvalues import *
 from datetime import datetime
 from time import sleep
 import copy
-from browser import *
+from procapital import *
 from kiteconnect import KiteConnect
 import generateMISMultiplierDict
 import requests
@@ -135,9 +135,8 @@ def place_co_order(order_detail):
         logger.critical("Problem Placing order: {}".format(e))
         place_bo_order(order_detail)
 
-    logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:"+stock_quote)))
+    logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
     # now looping for exit check
-
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------- #
@@ -145,18 +144,12 @@ def place_co_order(order_detail):
 # ---------------------------------------------------------------------------------------------------------------------------------- #
 
 
-
 def start():
-    global procap
-    procap = website()
-    procap.login()
     # list and calls
-    curr_list = procap.get_call()
+    curr_list = get_call()
     prev_list = copy.deepcopy(curr_list)
     new_call = extractValues(curr_list)
-    logger.critical(curr_list)
-    placing_call = new_call.get_call_dict()
-    logger.critical(placing_call)
+    logger.critical(new_call.get_call_dict())
 
     refresh_count = 0
 
@@ -164,17 +157,8 @@ def start():
         sleep(1)
     print('started')
     while 1:
-        sleep(2)
         # refresh list
-        try:
-            curr_list = procap.get_call()
-        except Exception as e:
-            logger.critical("Exception while refreshing call : " + e.__str__())
-            procap.stop_browser()
-            sleep(500)
-            logger.critical("starting browser again")
-            start()
-            return
+        curr_list = get_call()
 
         refresh_count = refresh_count + 1
         if curr_list == prev_list:
@@ -194,10 +178,10 @@ def start():
                     logger.critical("Time limit exceeded by {} secs".format(tle))
                 else:
                     if new_call.order_price != -1:
-                        logger.critical('Placing New order')
                         placing_call = new_call.get_call_dict()
+                        logger.critical("new order time: {}".format(tle))
                         place_co_order(placing_call)
-                        logger.critical(placing_call)                   # wait for the trade to exit
+                        logger.critical(placing_call)  # wait for the trade to exit
                         sleep(5 * 60)
             else:
                 logger.critical('Exiting previously placed order')
@@ -224,7 +208,6 @@ def init():
 
 
 if __name__ == '__main__':
-    init()
+    # init()
     start()
-    procap.stop_browser()
     invalidate_access_token()

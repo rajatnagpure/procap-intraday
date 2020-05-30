@@ -1,44 +1,19 @@
-CRITICAL ::: 2020-05-27 12:29:38,995 ::: Probelm generating access token: `request_token` should be minimum 10 characters in length.
-CRITICAL ::: 2020-05-27 12:29:42,466 ::: Access Token qywfPVtHcO7NTmCmJtf5Aj4WrheMQ4eI
-CRITICAL ::: 2020-05-27 12:29:50,214 ::: Login Successful
-CRITICAL ::: 2020-05-27 12:29:55,027 ::: ['27 May 2020', 'SELL', 'sell airtel @562.25, sl @564.25, tgt @559.25\nTime Call Posted : 09:54 am\nTime Call hit : 10:14 am\n']
-CRITICAL ::: 2020-05-27 12:29:56,802 ::: {'action': 'SELL', 'company_raw_text': 'airtel', 'close_match_list': ['BHARTIARTL'], 'order_price': 562.25, 'target_price': 559.25, 'stop_loss_price': 564.25, 'exit_price': -1.0, 'entry_time': datetime.time(9, 54)}
-CRITICAL ::: 2020-05-27 12:30:00,450 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:04,428 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:08,043 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:11,493 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:15,065 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:18,703 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:22,276 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:25,858 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:29,232 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:32,809 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:36,291 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:39,675 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:42,977 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:46,181 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:50,010 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:53,213 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:56,561 ::: getting pass
-CRITICAL ::: 2020-05-27 12:30:59,733 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:02,911 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:06,238 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:09,462 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:12,828 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:16,962 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:20,166 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:23,389 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:26,881 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:30,107 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:33,408 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:36,618 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:40,325 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:44,237 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:48,679 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:52,728 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:56,031 ::: getting pass
-CRITICAL ::: 2020-05-27 12:31:59,393 ::: getting pass
-CRITICAL ::: 2020-05-27 12:32:02,930 ::: getting pass
-CRITICAL ::: 2020-05-27 12:32:06,535 ::: getting pass
-CRITICAL ::: 2020-05-27 12:32:11,111 ::: getting pass
-CRITICAL ::: 2020-05-27 12:32:14,610 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:12,134 ::: {'action': 'BUY', 'company_raw_text': 'axis bank', 'close_match_list': ['AXISBANK', 'AXISBANK'], 'order_price': 384.0, 'target_price': 388.0, 'stop_loss_price': 380.95, 'exit_price': -1.0, 'entry_time': datetime.time(11, 6)}
+CRITICAL ::: 2020-05-30 11:10:16,171 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:19,881 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:29,063 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:31,504 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:34,153 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:35,922 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:37,923 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:39,886 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:42,226 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:44,612 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:46,344 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:48,085 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:50,050 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:51,791 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:53,677 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:55,632 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:57,433 ::: getting pass
+CRITICAL ::: 2020-05-30 11:10:58,971 ::: getting pass
