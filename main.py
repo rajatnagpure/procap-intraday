@@ -205,6 +205,6 @@ def init():
 
 
 if __name__ == '__main__':
-    # init()
+    init()
     start()
     invalidate_access_token()
