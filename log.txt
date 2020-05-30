@@ -1,19 +1,10 @@
-CRITICAL ::: 2020-05-30 11:10:12,134 ::: {'action': 'BUY', 'company_raw_text': 'axis bank', 'close_match_list': ['AXISBANK', 'AXISBANK'], 'order_price': 384.0, 'target_price': 388.0, 'stop_loss_price': 380.95, 'exit_price': -1.0, 'entry_time': datetime.time(11, 6)}
-CRITICAL ::: 2020-05-30 11:10:16,171 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:19,881 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:29,063 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:31,504 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:34,153 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:35,922 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:37,923 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:39,886 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:42,226 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:44,612 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:46,344 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:48,085 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:50,050 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:51,791 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:53,677 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:55,632 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:57,433 ::: getting pass
-CRITICAL ::: 2020-05-30 11:10:58,971 ::: getting pass
+CRITICAL ::: 2020-05-30 14:34:52,906 ::: {'action': 'BUY', 'company_raw_text': 'axis bank', 'close_match_list': ['AXISBANK', 'AXISBANK'], 'order_price': 384.0, 'target_price': 388.0, 'stop_loss_price': 380.95, 'exit_price': -1.0, 'entry_time': datetime.time(11, 6)}
+CRITICAL ::: 2020-05-30 14:34:56,638 ::: getting pass
+CRITICAL ::: 2020-05-30 14:34:59,930 ::: getting pass
+CRITICAL ::: 2020-05-30 14:35:05,000 ::: getting pass
+CRITICAL ::: 2020-05-30 14:35:08,158 ::: getting pass
+CRITICAL ::: 2020-05-30 14:35:11,655 ::: getting pass
+CRITICAL ::: 2020-05-30 14:35:15,005 ::: getting pass
+CRITICAL ::: 2020-05-30 14:35:18,156 ::: getting pass
+CRITICAL ::: 2020-05-30 14:35:21,323 ::: getting pass
+CRITICAL ::: 2020-05-30 14:35:24,126 ::: getting pass

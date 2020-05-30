@@ -67,11 +67,11 @@ def get_company_quote(close_match_list, order_price):
         if q < mini:
             mini = q
             my_stock = i
-    return my_stock
+    return my_stock, mini
 
 
 def get_mis_buyable_quantity(stock_quote, order_price):
-    total_margin_available = kite.margins()["equity"]["net"]
+    # total_margin_available = kite.margins()["equity"]["net"]
     mis_multi = mis_multipliers[stock_quote]
     total_quantity = int((total_margin_available * mis_multi) / order_price)
     return total_quantity
@@ -88,7 +88,9 @@ def place_bo_order(order_detail):
         target_price = order_detail["target_price"] - process_calculation_margin
         stop_loss_price = order_detail["stop_loss_price"] - process_calculation_margin
 
-    stock_quote = get_company_quote(order_detail["close_match_list"], order_price)
+    stock_quote, mini = get_company_quote(order_detail["close_match_list"], order_price)
+    if mini > 10:
+        return
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
         kite.place_order(kite.VARIETY_BO,
@@ -99,13 +101,12 @@ def place_bo_order(order_detail):
                          kite.PRODUCT_MIS,
                          kite.ORDER_TYPE_LIMIT,
                          price=order_price,
-                         disclosed_quantity=None,
                          squareoff=target_price,
                          stoploss=stop_loss_price)
     except Exception as e:
-        logger.critical("Problem Placing order: {}".format(e))
-        place_bo_order(order_detail)
-    # now looping for exit check
+        logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
+        return
+        # now looping for exit check
 
 
 def place_co_order(order_detail):
@@ -119,7 +120,9 @@ def place_co_order(order_detail):
         target_price = order_detail["target_price"] - process_calculation_margin
         stop_loss_trigger = order_detail["stop_loss_price"] - process_calculation_margin
 
-    stock_quote = get_company_quote(order_detail["close_match_list"], order_price)
+    stock_quote, mini = get_company_quote(order_detail["close_match_list"], order_price)
+    if mini > 10:
+        return
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
         kite.place_order(kite.VARIETY_CO,
@@ -132,8 +135,8 @@ def place_co_order(order_detail):
                          price=order_price,
                          trigger_price=stop_loss_trigger)
     except Exception as e:
-        logger.critical("Problem Placing order: {}".format(e))
-        place_bo_order(order_detail)
+        logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
+        return
 
     logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
     # now looping for exit check
@@ -148,8 +151,8 @@ def start():
     # list and calls
     curr_list = get_call()
     prev_list = copy.deepcopy(curr_list)
-    new_call = extractValues(curr_list)
-    logger.critical(new_call.get_call_dict())
+    new_call = extract_values(curr_list)
+    logger.critical(new_call)
 
     refresh_count = 0
 
@@ -157,40 +160,34 @@ def start():
         sleep(1)
     print('started')
     while 1:
+        sleep(1)
         # refresh list
-        curr_list = get_call()
+        try:
+            curr_list = get_call()
+        except Exception as e:
+            logger.critical("problem Refreshing call: {}".format(e))
 
         refresh_count = refresh_count + 1
         if curr_list == prev_list:
             logger.critical('getting pass')
         else:
             try:
-                new_call.reuse(curr_list)
+                new_call = extract_values(curr_list)
             except Exception as e:
                 logger.critical("Exception while extracting call : " + e.__str__())
                 prev_list = copy.deepcopy(curr_list)
                 continue
 
-            if curr_list[2].find('exit') is -1:
-                tle = (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(),
-                                                                                                  new_call.get_entry_time())).total_seconds()
-                if tle > 240:
-                    logger.critical("Time limit exceeded by {} secs".format(tle))
-                else:
-                    if new_call.order_price != -1:
-                        placing_call = new_call.get_call_dict()
-                        logger.critical("new order time: {}".format(tle))
-                        place_co_order(placing_call)
-                        logger.critical(placing_call)  # wait for the trade to exit
-                        sleep(5 * 60)
+            tle = (datetime.combine(datetime.now(), datetime.now().time()) - datetime.combine(datetime.now(),
+                                                                                              new_call[
+                                                                                                  "entry_time"])).total_seconds()
+            if tle > 240:
+                logger.critical("Time limit exceeded by {} secs".format(tle))
             else:
-                logger.critical('Exiting previously placed order')
-                if new_call.exit_price == -1:
-                    # Exit on MARKET PRICE
-                    pass
-                else:
-                    # Exit on LIMIT PRICE
-                    pass
+                if new_call["order_price"] != -1:
+                    logger.critical("new order time: {}".format(tle))
+                    place_co_order(new_call)
+
             prev_list = copy.deepcopy(curr_list)
 
         if datetime.now().time() > square_off_time:
