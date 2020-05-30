@@ -106,7 +106,21 @@ def place_bo_order(order_detail):
     except Exception as e:
         logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
         return
-        # now looping for exit check
+    logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
+    # now looping for exit check
+    sleep(30)
+    while 1:
+        sleep(4)
+        exit_call = get_specific_call(order_detail["company_raw_text"])
+        exit_detail = extract_values(exit_call)
+        if exit_call[3] is 'Call Closed':
+            return
+        if exit_detail["exit_price"] is not -1.0:
+            # exit on exit price.
+            return
+        if datetime.now().time() > square_off_time:
+            # exit on market price
+            return
 
 
 def place_co_order(order_detail):
@@ -140,6 +154,23 @@ def place_co_order(order_detail):
 
     logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
     # now looping for exit check
+    sleep(30)
+    while 1:
+        sleep(4)
+        exit_call = get_specific_call(order_detail["company_raw_text"])
+        exit_detail = extract_values(exit_call)
+        if exit_call[3] is 'Call Closed':
+            if exit_call[4] is not 'Stop Loss\n':
+                # exit on target price
+                return
+            else:
+                return
+        if exit_detail["exit_price"] is not -1.0:
+            # exit on exit price.
+            return
+        if datetime.now().time() > square_off_time:
+            # exit on market price
+            return
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------- #

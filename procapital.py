@@ -9,8 +9,9 @@ def get_specific_call(company_name):
     table = soup.table
     table_rows = table.find_all('tr')
     tr = table_rows[1]
+    table_rows = table_rows[1:]
     for trs in table_rows:
-        all_tds = trs.fins_all('td')[2].text
+        all_tds = trs.find_all('td')[2].text
         if all_tds.find(company_name) != -1:
             tr = trs
     td = tr.find_all('td')

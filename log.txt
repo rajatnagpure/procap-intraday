@@ -1,5 +1,4 @@
-CRITICAL ::: 2020-05-30 17:05:11,974 ::: Access Token vBm6OPDDbEQizmWvc0xwN2lKeKAkwf8z
-CRITICAL ::: 2020-05-30 17:05:13,584 ::: {'action': 'BUY', 'company_raw_text': 'axis bank', 'close_match_list': ['AXISBANK', 'AXISBANK'], 'order_price': 384.0, 'target_price': 388.0, 'stop_loss_price': 380.95, 'exit_price': -1.0, 'entry_time': datetime.time(11, 6)}
-CRITICAL ::: 2020-05-30 17:05:16,035 ::: getting pass
-CRITICAL ::: 2020-05-30 17:05:16,036 ::: Refresh Count is : 1
-CRITICAL ::: 2020-05-30 17:05:16,036 ::: Exit and Out
+CRITICAL ::: 2020-05-30 21:38:15,474 ::: {'action': 'BUY', 'company_raw_text': 'axis bank', 'close_match_list': ['AXISBANK', 'AXISBANK'], 'order_price': 384.0, 'target_price': 388.0, 'stop_loss_price': 380.95, 'exit_price': -1.0, 'entry_time': datetime.time(11, 6)}
+CRITICAL ::: 2020-05-30 21:38:18,110 ::: getting pass
+CRITICAL ::: 2020-05-30 21:38:18,110 ::: Refresh Count is : 1
+CRITICAL ::: 2020-05-30 21:38:18,110 ::: Exit and Out

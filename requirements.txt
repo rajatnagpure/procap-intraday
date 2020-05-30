@@ -2,3 +2,4 @@ beautifulsoup4>=4.9.1
 lxml>=4.5.1
 kiteconnect>=3.8.2
 requests>=2.23.0
+Twisted>=20.3.0
