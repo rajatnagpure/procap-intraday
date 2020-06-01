@@ -61,6 +61,8 @@ def invalidate_access_token():
 
 def get_company_quote(close_match_list, order_price):
     mini = 100
+    if len(close_match_list) is 0:
+        return "", 0
     my_stock = close_match_list[0]
     for i in close_match_list:
         q = abs(kite.ltp("NSE:" + i)["NSE:" + i]["last_price"] - order_price)
@@ -93,22 +95,23 @@ def place_bo_order(order_detail):
         return
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
-        kite.place_order(kite.VARIETY_BO,
-                         kite.EXCHANGE_NSE,
-                         stock_quote,
-                         action,
-                         quantity,
-                         kite.PRODUCT_MIS,
-                         kite.ORDER_TYPE_LIMIT,
-                         price=order_price,
-                         squareoff=target_price,
-                         stoploss=stop_loss_price)
+        order_id = kite.place_order(kite.VARIETY_BO,
+                                    kite.EXCHANGE_NSE,
+                                    stock_quote,
+                                    action,
+                                    quantity,
+                                    kite.PRODUCT_MIS,
+                                    kite.ORDER_TYPE_LIMIT,
+                                    price=order_price,
+                                    squareoff=target_price,
+                                    stoploss=stop_loss_price)
     except Exception as e:
         logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
         return
     logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
     # now looping for exit check
     sleep(30)
+    # check for success of order.
     while 1:
         sleep(4)
         exit_call = get_specific_call(order_detail["company_raw_text"])
@@ -125,51 +128,54 @@ def place_bo_order(order_detail):
 
 def place_co_order(order_detail):
     action = order_detail["action"]
-    if action is "BUY":
+    if action is order_detail["target_price"] > order_detail["order_price"]:
         order_price = order_detail["order_price"] + process_calculation_margin
         target_price = order_detail["target_price"] + process_calculation_margin
         stop_loss_trigger = order_detail["stop_loss_price"] + process_calculation_margin
+        action = 'BUY'
     else:
         order_price = order_detail["order_price"] - process_calculation_margin
         target_price = order_detail["target_price"] - process_calculation_margin
         stop_loss_trigger = order_detail["stop_loss_price"] - process_calculation_margin
+        action = 'SELL'
 
     stock_quote, mini = get_company_quote(order_detail["close_match_list"], order_price)
-    if mini > 10:
+    if mini > 10 or stock_quote is "":
         return
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     try:
-        kite.place_order(kite.VARIETY_CO,
-                         kite.EXCHANGE_NSE,
-                         stock_quote,
-                         action,
-                         quantity,
-                         kite.PRODUCT_MIS,
-                         kite.ORDER_TYPE_LIMIT,
-                         price=order_price,
-                         trigger_price=stop_loss_trigger)
+        order_id = kite.place_order(kite.VARIETY_CO,
+                                    kite.EXCHANGE_NSE,
+                                    stock_quote,
+                                    action,
+                                    quantity,
+                                    kite.PRODUCT_MIS,
+                                    kite.ORDER_TYPE_LIMIT,
+                                    price=order_price,
+                                    trigger_price=stop_loss_trigger)
     except Exception as e:
         logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
         return
-
+    logger.critical("Order Detail is : {}".format(order_detail))
     logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
     # now looping for exit check
     sleep(30)
+    # check for success of order.
     while 1:
         sleep(4)
         exit_call = get_specific_call(order_detail["company_raw_text"])
         exit_detail = extract_values(exit_call)
         if exit_call[3] is 'Call Closed':
             if exit_call[4] is not 'Stop Loss\n':
-                # exit on target price
+                kite.exit_order('co', order_id=order_id)
                 return
             else:
                 return
         if exit_detail["exit_price"] is not -1.0:
-            # exit on exit price.
+            kite.exit_order('co', order_id=order_id)
             return
         if datetime.now().time() > square_off_time:
-            # exit on market price
+            kite.exit_order('co', order_id=order_id)
             return
 
 
@@ -228,7 +234,7 @@ def start():
 
 
 def init():
-    generateMISMultiplierDict.generate_mis_multiplier_dict()
+    # generateMISMultiplierDict.generate_mis_multiplier_dict()
     global kite
     kite = KiteConnect(api_key=zerodha_api_key)
     get_access_token()
