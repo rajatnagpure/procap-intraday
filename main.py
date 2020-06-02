@@ -166,10 +166,13 @@ def place_co_order(order_detail):
     logger.critical("Order Detail is : {}".format(order_detail))
     logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
     # now looping for exit check
-    sleep(60)
+    sleep(5*60)
     # check if order succeeded
     if kite.order_history(order_id)[-1]["status"] is not 'COMPLETE':
-        kite.cancel_order('co', order_id)
+        try:
+            kite.cancel_order('co', order_id)
+        except Exception as e:
+            logger.critical("Problem cancelling order: {}".format(e))
         return
     # check for success of order.
     while 1:
@@ -203,7 +206,7 @@ def start():
     logger.critical(new_call)
 
     refresh_count = 0
-
+    print("about to start")
     while datetime.now().time() < market_opening_time:
         sleep(1)
     print('started')
@@ -245,7 +248,7 @@ def start():
 
 
 def init():
-    # generateMISMultiplierDict.generate_mis_multiplier_dict()
+    generateMISMultiplierDict.generate_mis_multiplier_dict()
     global kite
     kite = KiteConnect(api_key=zerodha_api_key)
     get_access_token()

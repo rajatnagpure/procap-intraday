@@ -106,12 +106,12 @@ def extract_values(row_call_detail):
     # it might be wrong and will return None if went wrong
     # it uses function get_all_matches
     close_matches = get_all_matches(all_company_quotes, company_name.lower().replace(" ", ""))
-    close_match_fin = []
+    close_match_fin = set()
     for i in close_matches:
         number = all_company_quotes.index(i)
         if number % 2 != 0:
             number = number - 1
-        close_match_fin.append(all_company_quotes[number])
+        close_match_fin.add(all_company_quotes[number])
     close_match_list = [i.upper() for i in close_match_fin]
 
     return {"action": call_action, "company_raw_text": company_name,

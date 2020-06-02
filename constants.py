@@ -11,7 +11,7 @@ zerodha_access_token = ""
 
 
 # Zerodha utils
-process_calculation_margin = 0.3
+process_calculation_margin = 0.5
 total_margin_available = 10000
 
 
