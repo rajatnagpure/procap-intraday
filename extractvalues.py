@@ -1,6 +1,5 @@
 from constants import *
 from datetime import datetime
-import difflib
 
 
 def get_all_matches(input_list, subs):
@@ -8,7 +7,7 @@ def get_all_matches(input_list, subs):
     for i in input_list:
         if subs in i:
             res.append(i)
-    return res + difflib.get_close_matches(subs, input_list)
+    return res
 
 
 def extract_values(row_call_detail):

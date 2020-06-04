@@ -163,7 +163,6 @@ def place_co_order(order_detail):
     except Exception as e:
         logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
         return
-    logger.critical("Order Detail is : {}".format(order_detail))
     logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
     # now looping for exit check
     sleep(5*60)
@@ -237,6 +236,7 @@ def start():
             else:
                 if new_call["order_price"] != -1:
                     logger.critical("new order time: {}".format(tle))
+                    logger.critical("Order Detail is : {}".format(new_call))
                     place_co_order(new_call)
 
             prev_list = copy.deepcopy(curr_list)
