@@ -90,77 +90,24 @@ def get_mis_buyable_quantity(stock_quote, order_price):
     return total_quantity
 
 
-def place_bo_order(order_detail):
-    action = order_detail["action"]
-    if action is order_detail["target_price"] > order_detail["order_price"]:
-        order_price = order_detail["order_price"] + process_calculation_margin
-        target_price = order_detail["target_price"] + process_calculation_margin
-        stop_loss_price = order_detail["stop_loss_price"] + process_calculation_margin
-        action = 'BUY'
-    else:
-        order_price = order_detail["order_price"] - process_calculation_margin
-        target_price = order_detail["target_price"] - process_calculation_margin
-        stop_loss_price = order_detail["stop_loss_price"] - process_calculation_margin
-        action = 'SELL'
-
-    stock_quote, mini = get_company_quote(order_detail["close_match_list"], order_price)
-    if mini > 10 or stock_quote is "":
-        return
-    quantity = get_mis_buyable_quantity(stock_quote, order_price)
-    try:
-        order_id = kite.place_order(kite.VARIETY_BO,
-                                    kite.EXCHANGE_NSE,
-                                    stock_quote,
-                                    action,
-                                    quantity,
-                                    kite.PRODUCT_MIS,
-                                    kite.ORDER_TYPE_LIMIT,
-                                    price=order_price,
-                                    squareoff=target_price,
-                                    stoploss=stop_loss_price)
-    except Exception as e:
-        logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
-        return
-    logger.critical("Order Detail is : {}".format(order_detail))
-    logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
-    # now looping for exit check
-    sleep(60)
-    # check if order succeeded
-    if kite.order_history(order_id)[-1]["status"] is not 'COMPLETE':
-        kite.cancel_order('bo', order_id)
-        return
-    # check for success of order.
-    while 1:
-        sleep(4)
-        exit_call = get_specific_call(order_detail["company_raw_text"])
-        exit_detail = extract_values(exit_call)
-        if exit_call[3] is 'Call Closed':
-            return
-        if exit_detail["exit_price"] is not -1.0:
-            # modify target trigger price to exit price
-            return
-        if datetime.now().time() > square_off_time:
-            kite.exit_order('bo', order_id=order_id)
-            return
-
-
 def place_co_order(order_detail):
     action = order_detail["action"]
-    if action is order_detail["target_price"] > order_detail["order_price"]:
-        order_price = order_detail["order_price"] + process_calculation_margin
-        target_price = order_detail["target_price"] + process_calculation_margin
-        stop_loss_trigger = order_detail["stop_loss_price"] + process_calculation_margin
-        action = 'BUY'
-    else:
-        order_price = order_detail["order_price"] - process_calculation_margin
-        target_price = order_detail["target_price"] - process_calculation_margin
-        stop_loss_trigger = order_detail["stop_loss_price"] - process_calculation_margin
-        action = 'SELL'
-
+    order_price = order_detail["order_price"]
     stock_quote, mini = get_company_quote(order_detail["close_match_list"], order_price)
     if mini > 10 or stock_quote is "":
         return
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
+
+    if action is order_detail["target_price"] > order_detail["order_price"]:
+        order_price = order_detail["order_price"] + mini
+        target_price = order_detail["target_price"] + mini
+        stop_loss_trigger = order_detail["stop_loss_price"] + mini
+        action = 'BUY'
+    else:
+        order_price = order_detail["order_price"] - mini
+        target_price = order_detail["target_price"] - mini
+        stop_loss_trigger = order_detail["stop_loss_price"] - mini
+        action = 'SELL'
     try:
         order_id = kite.place_order(kite.VARIETY_CO,
                                     kite.EXCHANGE_NSE,
