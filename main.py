@@ -60,20 +60,26 @@ def invalidate_access_token():
 
 
 def get_company_quote(close_match_list, order_price):
-    mini = 100
     if len(close_match_list) is 0:
         return "", 0
+
     my_stock = close_match_list[0]
+    mini = 100
+    try:
+        temp_list = ["NSE:" + i for i in close_match_list]
+        ltp_list = kite.ltp(temp_list)
+    except Exception as e:
+        logger.critical("Problem resolving company qoute: {}".format(e))
+        return "", 0
+
     for i in close_match_list:
-        try:
-            rate = kite.ltp("NSE:" + i)["NSE:" + i]["last_price"]
-        except Exception as e:
-            logger.critical("Problem resolving company qoute: {}".format(e))
-            rate = order_price + 100
-        q = abs(rate - order_price)
-        if q < mini:
-            mini = q
+        if "NSE"+i not in ltp_list.keys():
+            continue
+        diff = abs(ltp_list["NSE"+i]["last_price"] - order_price)
+        if diff < mini:
+            mini = diff
             my_stock = i
+
     return my_stock, mini
 
 
