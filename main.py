@@ -65,7 +65,12 @@ def get_company_quote(close_match_list, order_price):
         return "", 0
     my_stock = close_match_list[0]
     for i in close_match_list:
-        q = abs(kite.ltp("NSE:" + i)["NSE:" + i]["last_price"] - order_price)
+        try:
+            rate = kite.ltp("NSE:" + i)["NSE:" + i]["last_price"]
+        except Exception as e:
+            logger.critical("Problem resolving company qoute: {}".format(e))
+            rate = order_price + 100
+        q = abs(rate - order_price)
         if q < mini:
             mini = q
             my_stock = i
@@ -163,7 +168,10 @@ def place_co_order(order_detail):
     except Exception as e:
         logger.critical("Problem Placing order: {}\n so quiting and proceeding".format(e))
         return
-    logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
+    try:
+        logger.critical("Order placed: ltp is: {}".format(kite.ltp("NSE:" + stock_quote)))
+    except Exception as e:
+        logger.critical("Problem quoting the company ltp after placing order:{}".format(e))
     # now looping for exit check
     sleep(5*60)
     # check if order succeeded
