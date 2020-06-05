@@ -2,11 +2,11 @@ from datetime import time
 import logging
 
 # Zerodha API Info
-zerodha_id = "XY5030"
-zerodha_password = "Rajat@321"
-zerodha_pin = "270519"
-zerodha_api_key = "gytb639zxx8wupdk"
-zerodha_api_secret = "7o5vxuncx1e8iwj6uomlvz4b55kei8wc"
+zerodha_id = ""
+zerodha_password = ""
+zerodha_pin = ""
+zerodha_api_key = ""
+zerodha_api_secret = ""
 zerodha_access_token = ""
 
 
