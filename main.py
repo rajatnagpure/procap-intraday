@@ -73,9 +73,9 @@ def get_company_quote(close_match_list, order_price):
         return "", 0
 
     for i in close_match_list:
-        if "NSE"+i not in ltp_list.keys():
+        if "NSE:"+i not in ltp_list.keys():
             continue
-        diff = abs(ltp_list["NSE"+i]["last_price"] - order_price)
+        diff = abs(ltp_list["NSE:"+i]["last_price"] - order_price)
         if diff < mini:
             mini = diff
             my_stock = i
