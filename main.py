@@ -97,7 +97,7 @@ def place_co_order(order_detail):
     if mini > 10 or stock_quote is "":
         return
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
-
+    mini = mini + process_calculation_margin
     if action is order_detail["target_price"] > order_detail["order_price"]:
         order_price = order_detail["order_price"] + mini
         target_price = order_detail["target_price"] + mini
