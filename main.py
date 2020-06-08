@@ -142,14 +142,18 @@ def place_co_order(order_detail):
         if exit_call[3] is 'Call Closed':
             if exit_call[4] is not 'Stop Loss\n':
                 kite.exit_order('co', order_id=order_id)
+                logger.critical("Exiting order on Call Achieved")
                 return
             else:
+                logger.critical("Exiting order on Stop Loss Hit")
                 return
         if exit_detail["exit_price"] is not -1.0:
             kite.exit_order('co', order_id=order_id)
+            logger.critical("Exiting order on call modified exit price")
             return
         if datetime.now().time() > square_off_time:
             kite.exit_order('co', order_id=order_id)
+            logger.critical("Exiting order on market close time")
             return
 
 
@@ -209,7 +213,7 @@ def start():
 
 
 def init():
-    generateMISMultiplierDict.generate_mis_multiplier_dict()
+    # generateMISMultiplierDict.generate_mis_multiplier_dict()
     global kite
     kite = KiteConnect(api_key=zerodha_api_key)
     get_access_token()
