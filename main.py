@@ -98,7 +98,7 @@ def place_co_order(order_detail):
         return
     quantity = get_mis_buyable_quantity(stock_quote, order_price)
     mini = mini + process_calculation_margin
-    if action is order_detail["target_price"] > order_detail["order_price"]:
+    if order_detail["target_price"] > order_detail["order_price"]:
         order_price = order_detail["order_price"] + mini
         target_price = order_detail["target_price"] + mini
         stop_loss_trigger = order_detail["stop_loss_price"] + mini
@@ -128,7 +128,7 @@ def place_co_order(order_detail):
     # now looping for exit check
     sleep(5*60)
     # check if order succeeded
-    if kite.order_history(order_id)[-1]["status"] is not 'COMPLETE':
+    if kite.order_history(order_id)[-1]["status"] != 'COMPLETE':
         try:
             kite.cancel_order('co', order_id)
         except Exception as e:
