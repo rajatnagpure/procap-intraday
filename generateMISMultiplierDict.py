@@ -13,9 +13,9 @@ def generate_mis_multiplier_dict():
         soup_table = soup_whole_table.find('tbody')
         for row in soup_table.find_all('tr'):
             cols = row.find_all('td')
-            script = cols[1].text
+            script = cols[0].text
             script = script[:script.find(':')]
-            mis_multi = int(cols[3].text.strip()[:-1])
+            mis_multi = int(cols[2].text.strip()[:-1])
             mis_multipliers[script] = mis_multi
         try:
             with open('mis_multi_dict.json','w') as json_file:
