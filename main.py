@@ -155,6 +155,7 @@ def place_co_order(order_detail):
             kite.exit_order('co', order_id=order_id)
             logger.critical("Exiting order on market close time")
             return
+        logger.critical("getting pass in co order function")
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------- #
