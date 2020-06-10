@@ -135,7 +135,7 @@ def place_co_order(order_detail):
             logger.critical("Problem cancelling order: {}".format(e))
         return
     # check for success of order.
-    get_specific_call(order_detail["company_raw_text"])
+    logger.critical(get_specific_call(order_detail["company_raw_text"]))
     while 1:
         sleep(4)
         exit_call = get_specific_call(order_detail["company_raw_text"])
