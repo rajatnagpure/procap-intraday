@@ -142,6 +142,7 @@ def place_co_order(order_detail):
         exit_detail = extract_values(exit_call)
         if exit_call[3] == 'Call Closed':
             if exit_call[4] != 'Stop Loss\n':
+                sleep(60)
                 try:
                     kite.exit_order('co', order_id=order_id)
                 except Exception as e:
