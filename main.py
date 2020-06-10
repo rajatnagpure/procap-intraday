@@ -135,25 +135,37 @@ def place_co_order(order_detail):
             logger.critical("Problem cancelling order: {}".format(e))
         return
     # check for success of order.
+    get_specific_call(order_detail["company_raw_text"])
     while 1:
         sleep(4)
         exit_call = get_specific_call(order_detail["company_raw_text"])
         exit_detail = extract_values(exit_call)
-        if exit_call[3] is 'Call Closed':
-            if exit_call[4] is not 'Stop Loss\n':
-                kite.exit_order('co', order_id=order_id)
+        if exit_call[3] == 'Call Closed':
+            if exit_call[4] != 'Stop Loss\n':
+                try:
+                    kite.exit_order('co', order_id=order_id)
+                except Exception as e:
+                    logger.critical("Problem exiting order: {}".format(e))
                 logger.critical("Exiting order on Call Achieved")
                 return
             else:
                 logger.critical("Exiting order on Stop Loss Hit")
                 return
-        if exit_detail["exit_price"] is not -1.0:
-            kite.exit_order('co', order_id=order_id)
+        if exit_detail["exit_price"] != -1.0:
             logger.critical("Exiting order on call modified exit price")
+            try:
+                kite.exit_order('co', order_id=order_id)
+            except Exception as e:
+                logger.critical("Problem exiting order: {}".format(e))
+            logger.critical("Exiting order on Call Achieved")
             return
         if datetime.now().time() > square_off_time:
-            kite.exit_order('co', order_id=order_id)
             logger.critical("Exiting order on market close time")
+            try:
+                kite.exit_order('co', order_id=order_id)
+            except Exception as e:
+                logger.critical("Problem exiting order: {}".format(e))
+            logger.critical("Exiting order on Call Achieved")
             return
         logger.critical("getting pass in co order function")
 
