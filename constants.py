@@ -12,7 +12,7 @@ zerodha_access_token = ""
 
 # Zerodha utils
 process_calculation_margin = 0.2
-total_margin_available = 10000
+total_margin_available = 11000
 
 
 # Market timing for live

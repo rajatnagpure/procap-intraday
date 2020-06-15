@@ -130,7 +130,7 @@ def place_co_order(order_detail):
     # check if order succeeded
     if kite.order_history(order_id)[-1]["status"] != 'COMPLETE':
         try:
-            kite.cancel_order('co', order_id)
+            kite.cancel_order('co', order_id=order_id, parent_order_id=order_id)
         except Exception as e:
             logger.critical("Problem cancelling order: {}".format(e))
         return
@@ -142,12 +142,12 @@ def place_co_order(order_detail):
         exit_detail = extract_values(exit_call)
         if exit_call[3] == 'Call Closed':
             if exit_call[4] != 'Stop Loss\n':
-                sleep(60)
+                sleep(100)
+                logger.critical("Exiting order on Call Achieved")
                 try:
-                    kite.exit_order('co', order_id=order_id)
+                    kite.exit_order('co', order_id=order_id, parent_order_id=order_id)
                 except Exception as e:
                     logger.critical("Problem exiting order: {}".format(e))
-                logger.critical("Exiting order on Call Achieved")
                 return
             else:
                 logger.critical("Exiting order on Stop Loss Hit")
@@ -155,18 +155,16 @@ def place_co_order(order_detail):
         if exit_detail["exit_price"] != -1.0:
             logger.critical("Exiting order on call modified exit price")
             try:
-                kite.exit_order('co', order_id=order_id)
+                kite.exit_order('co', order_id=order_id, parent_order_id=order_id)
             except Exception as e:
                 logger.critical("Problem exiting order: {}".format(e))
-            logger.critical("Exiting order on Call Achieved")
             return
         if datetime.now().time() > square_off_time:
             logger.critical("Exiting order on market close time")
             try:
-                kite.exit_order('co', order_id=order_id)
+                kite.exit_order('co', order_id=order_id, parent_order_id=order_id)
             except Exception as e:
                 logger.critical("Problem exiting order: {}".format(e))
-            logger.critical("Exiting order on Call Achieved")
             return
         logger.critical("getting pass in co order function")
 
@@ -227,7 +225,7 @@ def start():
 
 
 def init():
-    # generateMISMultiplierDict.generate_mis_multiplier_dict()
+    generateMISMultiplierDict.generate_mis_multiplier_dict()
     global kite
     kite = KiteConnect(api_key=zerodha_api_key)
     get_access_token()
