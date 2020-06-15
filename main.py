@@ -73,9 +73,9 @@ def get_company_quote(close_match_list, order_price):
         return "", 0
 
     for i in close_match_list:
-        if "NSE:"+i not in ltp_list.keys():
+        if "NSE:" + i not in ltp_list.keys():
             continue
-        diff = abs(ltp_list["NSE:"+i]["last_price"] - order_price)
+        diff = abs(ltp_list["NSE:" + i]["last_price"] - order_price)
         if diff < mini:
             mini = diff
             my_stock = i
@@ -126,11 +126,21 @@ def place_co_order(order_detail):
     except Exception as e:
         logger.critical("Problem quoting the company ltp after placing order:{}".format(e))
     # now looping for exit check
-    sleep(5*60)
+    sleep(5 * 60)
+    order_book = kite.orders()
+    co_second_leg_order_id = 0
+    for order in order_book:
+        if order["parent_order_id"] == order_id:
+            co_second_leg_order_id = order["order_id"]
+            break
     # check if order succeeded
+    print("Parent Order ID:. {}".format(order_id))
+    print("Second leg Order ID:. {}".format(co_second_leg_order_id))
+    logger.critical("Parent Order ID:. {}".format(order_id))
+    logger.critical("Second leg Order ID:. {}".format(co_second_leg_order_id))
     if kite.order_history(order_id)[-1]["status"] != 'COMPLETE':
         try:
-            kite.cancel_order('co', order_id=order_id, parent_order_id=order_id)
+            kite.cancel_order('co', order_id=co_second_leg_order_id, parent_order_id=order_id)
         except Exception as e:
             logger.critical("Problem cancelling order: {}".format(e))
         return
@@ -145,7 +155,7 @@ def place_co_order(order_detail):
                 sleep(100)
                 logger.critical("Exiting order on Call Achieved")
                 try:
-                    kite.exit_order('co', order_id=order_id, parent_order_id=order_id)
+                    kite.exit_order('co', order_id=co_second_leg_order_id, parent_order_id=order_id)
                 except Exception as e:
                     logger.critical("Problem exiting order: {}".format(e))
                 return
@@ -155,14 +165,14 @@ def place_co_order(order_detail):
         if exit_detail["exit_price"] != -1.0:
             logger.critical("Exiting order on call modified exit price")
             try:
-                kite.exit_order('co', order_id=order_id, parent_order_id=order_id)
+                kite.exit_order('co', order_id=co_second_leg_order_id, parent_order_id=order_id)
             except Exception as e:
                 logger.critical("Problem exiting order: {}".format(e))
             return
         if datetime.now().time() > square_off_time:
             logger.critical("Exiting order on market close time")
             try:
-                kite.exit_order('co', order_id=order_id, parent_order_id=order_id)
+                kite.exit_order('co', order_id=co_second_leg_order_id, parent_order_id=order_id)
             except Exception as e:
                 logger.critical("Problem exiting order: {}".format(e))
             return
