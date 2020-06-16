@@ -14,6 +14,7 @@ def get_specific_call(company_name):
         all_tds = trs.find_all('td')[2].text
         if all_tds.find(company_name) != -1:
             tr = trs
+            break
     td = tr.find_all('td')
     row = [i.text for i in td]
     return row
