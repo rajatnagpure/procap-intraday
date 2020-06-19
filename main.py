@@ -87,6 +87,7 @@ def get_mis_buyable_quantity(stock_quote, order_price):
     # total_margin_available = kite.margins()["equity"]["net"]
     mis_multi = mis_multipliers[stock_quote]
     total_quantity = int((total_margin_available * mis_multi) / order_price)
+    logger.critical("total_margin_available: {} \n mis_multi: {} total_quantity: {}".format(total_margin_available,mis_multi,total_quantity))
     return total_quantity
 
 
@@ -138,6 +139,8 @@ def place_co_order(order_detail):
     print("Second leg Order ID:. {}".format(co_second_leg_order_id))
     logger.critical("Parent Order ID:. {}".format(order_id))
     logger.critical("Second leg Order ID:. {}".format(co_second_leg_order_id))
+    print("Margin Remaining : {}".format(kite.margins()["equity"]["net"]))
+    logger.critical("Margin Remaining : {}".format(kite.margins()["equity"]["net"]))
     if kite.order_history(order_id)[-1]["status"] != 'COMPLETE':
         try:
             kite.cancel_order('co', order_id=co_second_leg_order_id, parent_order_id=order_id)
